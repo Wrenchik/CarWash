@@ -4,9 +4,23 @@
     <meta charset="UTF-8">
     <title>{% block title %}Автомойка{% endblock %}</title>
 </head>
+
+
 <body>
 
-    {% include 'includes/header.html' %}
+    <header>
+        <nav>
+            <ul>
+                <li><a href="{% url 'main_page' %}">Лого</a></li>
+                {% if user.is_authenticated %}
+                    <li><a href="{% url 'logout' %}">Выйти</a></li>
+                {% else %}
+                    <li><a href="{% url 'login' %}">Вход</a></li>
+                    <li><a href="{% url 'register' %}">Регистрация</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+    </header>
 
     <main>
         {% block content %}{% endblock %}

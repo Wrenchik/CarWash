@@ -1,8 +1,6 @@
-<section id="services">
-    <h2>Услуги</h2>
-    <ul>
-        <li>Услуга 1</li>
-        <li>Услуга 2</li>
-        <li>Услуга 3</li>
-    </ul>
-</section>
+<h2>Наши услуги</h2>
+<ul>
+    {% for service in services %}
+        <li>{{ service.name }} — {{ service.price }} руб.</li>
+    {% endfor %}
+</ul>
