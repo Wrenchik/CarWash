@@ -1,11 +1,10 @@
 from django.shortcuts import render
+from .models import Service
 
 
 def get_main_page(request):
-    template_name = 'base.html'
+    template_name = 'main/main.html'
 
-    context = {
-        'page_title': 'Главная страница',
-    }
+    services = Service.objects.all()
 
-    return render(request, template_name, context)
+    return render(request, template_name,  {'services': services})

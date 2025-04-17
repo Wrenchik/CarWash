@@ -1,64 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>{% block title %}Автомойка{% endblock %}</title>
 </head>
 <body>
-    <header>
-        <nav>
-            <ul>
-                <li><a href="#about">Лого</a></li>
-                <li><a href="#login">Вход</a></li>
-            </ul>
-        </nav>
-    </header>
+
+    {% include 'includes/header.html' %}
 
     <main>
-        <section id="about">
-            <h2>О нас</h2>
-            <p>Описание компании...</p>
-        </section>
-
-        <section id="registration">
-            <div>
-                <h3>Зарегистрируйтесь</h3>
-                <button>Войти</button>
-            </div>
-        </section>
-
-        <section id="services">
-            <h2>Услуги</h2>
-            <ul>
-                <li>Услуга 1</li>
-                <li>Услуга 2</li>
-                <li>Услуга 3</li>
-            </ul>
-        </section>
-
-
-        <section id="reserve">
-            <button>Онлайн-запись</button>
-        </section>
-
-        <section id="reviews">
-            <h2>Отзывы</h2>
-            <div>
-                <blockquote>Отзыв 1</blockquote>
-            </div>
-            <div>
-                <blockquote>Отзыв 2</blockquote>
-            </div>
-        </section>
-
-        <section id="contacts">
-            <h2>Контакты</h2>
-        </section>
-
-        <section id="location">
-            <h2>Как нас найти</h2>
-        </section>
-
+        {% block content %}{% endblock %}
     </main>
 
 </body>
