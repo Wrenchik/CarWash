@@ -1,17 +1,18 @@
 <!DOCTYPE html>
 <html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <title>Регистрация</title>
-</head>
+<head><meta charset="UTF-8"><title>Регистрация</title></head>
 <body>
-    <h2>Регистрация</h2>
-
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Зарегистрироваться</button>
-    </form>
-
+  <h2>Регистрация</h2>
+  {% if messages %}
+  {% for msg in messages %}
+    <p style="color: {{ msg.tags }};">{{ msg }}</p>
+  {% endfor %}
+    {% endif %}
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Зарегистрироваться</button>
+  </form>
+  <p>Уже есть аккаунт? <a href="{% url 'login' %}">Войти</a></p>
 </body>
 </html>

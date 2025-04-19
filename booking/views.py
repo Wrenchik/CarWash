@@ -1,14 +1,18 @@
-from django.shortcuts import render, redirect
+from django.urls import reverse_lazy
+from django.views.generic import CreateView, TemplateView
+from django.contrib.auth.mixins import LoginRequiredMixin
+from .models import Booking
 from .forms import BookingForm
 
-def booking_page(request):
-    if request.method == 'POST':
-        form = BookingForm(request.POST)
-        if form.is_valid():
-            booking = form.save(commit=False)
-            booking.user = request.user
-            booking.save()
-            return redirect('main_page')
-    else:
-        form = BookingForm()
-    return render(request, 'booking/booking.html', {'form': form})
+class BookingCreateView(LoginRequiredMixin, CreateView):
+    model = Booking
+    form_class = BookingForm
+    template_name = 'booking/booking.html'
+    success_url = reverse_lazy('booking_success')
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
+
+class BookingSuccessView(TemplateView):
+    template_name = 'booking/success.html'
