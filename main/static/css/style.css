@@ -1,0 +1,136 @@
+body {
+    width: 1440px;          /* Ширина страницы */
+    height: 6492px;         /* Высота страницы */
+    position: relative;     /* Для корректного позиционирования */
+    margin: 0;              /* Убирает стандартные отступы */
+    background-color: #D9D9D9; /* Цвет фона (светло-серый) */
+  }
+  
+  .container {
+    position: absolute;     /* Абсолютное позиционирование */
+    top: -1212px;           /* Смещение вверх */
+    left: 441px;            /* Отступ слева */
+  }
+
+  .rectangle_1 {
+    width: 134px;
+    height: 37px;
+    position: absolute;
+    top: 36px;
+    left: 36px;
+    background-color: #B6B6B6; /* Цвет фона */
+    display: flex;
+    align-items: center;      /* Вертикальное выравнивание текста */
+    justify-content: center;  /* Горизонтальное выравнивание */
+}
+
+.logo-link {
+    color: #000;              /* Цвет текста */
+    text-decoration: none;    /* Убираем подчёркивание */
+    font-weight: bold;        /* Жирный шрифт (опционально) */
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.rectangle_2 {
+    width: 632px;
+    height: 37px;
+    position: absolute;
+    top: 38px;
+    left: 772px;
+    background-color: #B6B6B6;  /* Цвет из макета */
+}
+
+/* Стиль для линии (line_1) */
+.line_1 {
+    position: absolute;
+    width: 156px;
+    top: 1012px;
+    left: 642px;
+    border-top: 1px solid #000000; /* Горизонтальная линия */
+}
+
+/* Стиль для заголовка "О нас" */
+.about-header {
+    position: absolute;
+    top: 1052px;
+    left: 658px;
+    width: 124px;
+    height: 54px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    font-size: 45px;
+    line-height: 54px;
+    color: #000000;
+    margin: 0;
+    padding: 0;
+}
+
+/* Стиль для линии (line_2) */
+.line_2 {
+    position: absolute;
+    width: 156px;
+    top: 1429px;
+    left: 642px;
+    border-top: 1px solid #000000; /* Горизонтальная линия */
+}
+.line_3 {
+    position: absolute;
+    width: 156px;
+    top: 3187px;
+    left: 642px;
+    border-top: 1px solid #000000; /* Горизонтальная линия */
+}
+/* Стиль для текста "Зарегистрируйтесь" */
+.register-text h3 {
+    position: absolute;
+    top: 1577.62px;  /* Уточните значение, возможно опечатка (1577px?) */
+    left: 98px;
+    width: 430px;
+    height: 54px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    font-size: 45px;
+    line-height: 54px;
+    color: #000000;
+    margin: 0;
+    padding: 0;
+    transform: rotate(0.44deg); /* Небольшой поворот */
+}
+
+/* Стиль для кнопки регистрации */
+.register-button {
+    position: absolute;
+   top: 1680px;  /* узнать у ули позицию кнопки регистрации */
+    left: 100px;
+}
+
+.register-button button {
+    padding: 10px 20px;
+    font-family: 'Inter', sans-serif;
+    background-color: #B6B6B6;
+    color: #000000;
+    border: none;
+    cursor: pointer;
+}
+
+/* Заголовок "Наши услуги" */
+.services-title {
+    position: absolute;
+    top: 2185px;
+    left: 580px;
+    width: 320px;
+    height: 73px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    font-size: 45px;
+    line-height: 73px;  /* = height (100%) */
+    color: #000000;
+    margin: 0;
+    padding: 0;
+    white-space: nowrap;
+}
+

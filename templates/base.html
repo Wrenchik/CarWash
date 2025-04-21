@@ -1,17 +1,26 @@
+{% load static %} 
 <!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
     <title>{% block title %}Автомойка{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300&display=swap" rel="stylesheet">
+    
+    
 </head>
 
 
 <body>
-
+    
     <header>
+        <div class="rectangle_1">
+            <a href="{% url 'main_page' %}" class="logo-link">Лого</a>
+        </div>
+        <div class="rectangle_2"></div>
         <nav>
             <ul>
-                <li><a href="{% url 'main_page' %}">Лого</a></li>
+                <li></li> <!-- Пустой элемент для сохранения структуры (если нужно) -->
                 {% if user.is_authenticated %}
                     <li><a href="{% url 'logout' %}">Выйти</a></li>
                 {% else %}

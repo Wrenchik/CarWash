@@ -1,6 +1,12 @@
-<h2>Наши услуги</h2>
-<ul>
-    {% for service in services %}
-        <li>{{ service.name }} — {{ service.price }} руб.</li>
-    {% endfor %}
-</ul>
+{% extends "base.html" %}
+
+{% block content %}
+    <section id="services">
+        <h2 class="services-title">Наши услуги</h2>
+        <ul>
+            {% for service in services %}
+                <li>{{ service.name }} — {{ service.price }} руб.</li>
+            {% endfor %}
+        </ul>
+    </section>
+{% endblock %}
