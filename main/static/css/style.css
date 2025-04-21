@@ -133,4 +133,93 @@ body {
     padding: 0;
     white-space: nowrap;
 }
+/* Стили для текста "Онлайн-запись" */
+#reserve p {
+    position: absolute;
+    top: 3252px;
+    left: 552px;
+    width: 335px;
+    height: 54px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    font-size: 45px;
+    line-height: 54px;
+    color: #000000;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
 
+/* Стили для кнопки (если нужно оставить) */
+#reserve a {
+    
+    position: absolute;
+    top: 3466px; /* Под текстом */
+    left: 583px;
+    text-decoration: none;
+}
+
+#reserve button {
+    width: 273px;
+    height: 84px;
+    padding: 10px 20px;
+    font-family: 'Inter', sans-serif;
+    background: #908E8E;
+    color:#000 ;
+    border: none;
+    cursor: pointer;
+}
+
+/* Стили для текста "Отзывы" */
+#feedback p {
+    position: absolute;
+    top: 3684px;
+    left: 634px;
+    width: 171px;  /* Исправлено с "17lpx" на 171px */
+    height: 54px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    font-size: 45px;
+    line-height: 54px;  /* 100% высоты */
+    color: #000000;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    white-space: nowrap;
+}
+
+/* Стили для заголовка "Наши контакты" */
+#contacts h2 {
+    position: absolute;
+    top: 4768px;
+    left: 98px;
+    width: 335px;
+    height: 54px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    font-size: 45px;
+    line-height: 54px; /* 100% высоты */
+    color: #000000;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    white-space: nowrap;
+}
+
+/* Стили для заголовка "Как нас найти" */
+#location h2 {
+    position: absolute;
+    top: 5386px;
+    left: 567px;
+    width: 305px;
+    height: 54px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    font-size: 45px;
+    line-height: 54px; /* 100% высоты */
+    color: #000000;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    white-space: nowrap;
+}
