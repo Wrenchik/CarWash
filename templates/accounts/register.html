@@ -1,18 +1,30 @@
 <!DOCTYPE html>
 <html lang="ru">
-<head><meta charset="UTF-8"><title>Регистрация</title></head>
+<head>
+    <meta charset="UTF-8">
+    <title>Регистрация</title>
+    <style>
+        .error { color: #dc3545; }  /* красный */
+        .success { color: #28a745; } /* зеленый */
+        .info { color: #17a2b8; }   /* синий */
+        .warning { color: #ffc107; } /* желтый */
+    </style>
+</head>
 <body>
-  <h2>Регистрация</h2>
-  {% if messages %}
-  {% for msg in messages %}
-    <p style="color: {{ msg.tags }};">{{ msg }}</p>
-  {% endfor %}
+    <h2>Регистрация</h2>
+    
+    {% if messages %}
+        {% for msg in messages %}
+            <p class="{{ msg.tags }}">{{ msg }}</p>
+        {% endfor %}
     {% endif %}
-  <form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Зарегистрироваться</button>
-  </form>
-  <p>Уже есть аккаунт? <a href="{% url 'login' %}">Войти</a></p>
+    
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Зарегистрироваться</button>
+    </form>
+    
+    <p>Уже есть аккаунт? <a href="{% url 'login' %}">Войти</a></p>
 </body>
 </html>
