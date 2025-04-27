@@ -4,13 +4,28 @@
 
 {% block content %}
 
+    <section id="main">
+      <div class="main-content">
+        <div class="text-block">
+          <div class="headline">CleanLab —<br>формула идеальной чистоты</div>
+          <div class="subheadline">Где технологии и внимание к деталям создают эталонный результат</div>
+          <a href="{% url 'booking_page' %}" class="one-click-btn">
+            <span class="red-block"></span>
+            Быстрая запись в один клик <span class="arrow">→</span>
+          </a>
+        </div>
+        <div class="images">
+          <img src="{% static 'img/main1.png' %}" alt="ГлавноеФото1">
+          <img src="{% static 'img/main2.png' %}" alt="ГлавноеФото2">
+          <img src="{% static 'img/main3.png' %}" alt="ГлавноеФото3">
+        </div>
+      </div>
+    </section>
 
-    <img src="{% static 'img/main1.png' %}" alt="ГлавноеФото1" width="150">
-    
-    <div class="line_1"></div>
     <section id="about">
         <h2 class="about-header">О нас</h2>
-        <p>Описание компании...</p>
+        <p class="about-text">Наша автомойка – место, где ваш автомобиль получает профессиональный уход и безупречную чистоту. Мы предлагаем полный спектр услуг: от быстрой мойки кузова до комплексного детейлинга, используя только качественные и безопасные средства. Наша команда опытных мастеров позаботится о вашем авто, вернув ему свежесть и блеск.
+        <br>Мы ценим ваше время, поэтому предлагаем удобную онлайн-запись и четкие сроки выполнения работ. </p>
     </section>
 
     {% include "includes/registration.html" %}

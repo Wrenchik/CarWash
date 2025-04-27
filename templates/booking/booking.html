@@ -6,13 +6,24 @@
     <title>Онлайн-запись</title>
 </head>
 <body>
-    <h2 >Онлайн-запись</h2>
+    <h2>Онлайн-запись</h2>
 
-    <form method="post">
+    <form method="post" action="{% url 'booking_payment' %}">
         {% csrf_token %}
+
         {{ form.as_p }}
+
+        <label for="payment-method">Способ оплаты:</label>
+        <select name="payment_method" id="payment-method" required>
+            <option value="">-- Выберите способ оплаты --</option>
+            <option value="card">Банковская карта</option>
+            <option value="sbp">СБП</option>
+            <option value="cash">Наличные</option>
+        </select>
+
         <button type="submit">Записаться</button>
     </form>
 
 </body>
 </html>
+
