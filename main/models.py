@@ -9,9 +9,17 @@ class Service(models.Model):
         return self.name
 
 class Review(models.Model):
-    name = models.CharField(max_length=100)
-    text = models.TextField()
-    date = models.DateTimeField(auto_now_add=True)
+    name = models.CharField('Имя', max_length=100)
+    car_model = models.CharField('Модель авто', max_length=50, blank=True, null=True)
+    text = models.TextField('Текст отзыва')
+    date = models.DateTimeField('Дата', auto_now_add=True)
+    img = models.ImageField('Фото', upload_to='reviews/', blank=True, null=True)
+    is_published = models.BooleanField('Опубликовано', default=True)
+
+    class Meta:
+        verbose_name = 'Отзыв'
+        verbose_name_plural = 'Отзывы'
+        ordering = ['-date']
 
     def __str__(self):
-        return f'Отзыв от {self.name}'
+        return f'Отзыв от {self.name} ({self.date.date()})'

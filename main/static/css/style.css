@@ -1,20 +1,43 @@
 body {
-    min-width: 1440px;          /* Минимальная ширина */
-    width: 100%;                /* Гибкая ширина для больших экранов */
-    min-height: 100vh;          /* Минимальная высота - на весь экран */
-    position: relative;
-    margin: 0 auto;             /* Центрирование */
-    background-color: #d6aaaa;
-    overflow-x: hidden;  
-  }
-  
-  .container {
-    position: absolute;     /* Абсолютное позиционирование */
-    top: -1212px;           /* Смещение вверх */
-    left: 441px;            /* Отступ слева */
-  }
+    min-width: 1440px;
+    width: 100%;
+    min-height: 100vh;
+    margin: 0 auto;
+    background-color: #171717;
+    color: #FFFFFF;
+    font-family: 'Muller', sans-serif;
+    font-weight: 400;
+    line-height: 1.6;
+    overflow-x: hidden;
+}
 
-/* Новые стили для логотипа */
+.container {
+    width: 100%;
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 20px;
+    position: relative;
+}
+
+section {
+    padding: 80px 0;
+    position: relative;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Druk Wide Cyr', sans-serif;
+    font-weight: 500;
+    color: #FFFFFF;
+    margin: 0 0 30px 0;
+}
+
+h2 {
+    font-size: 45px;
+    line-height: 1.2;
+    text-align: center;
+    text-transform: uppercase;
+}
+
 .logo-container {
     position: absolute;
     top: 35px;
@@ -27,259 +50,152 @@ body {
     font-family: 'Druk Wide Cyr', sans-serif;
     font-weight: 500;
     font-size: 21px;
-    line-height: 25px; /* 100% от высоты контейнера */
+    line-height: 25px;
     color: #FFFFFF;
     text-decoration: none;
     display: block;
     text-align: center;
     width: 100%;
     height: 100%;
+    text-transform: uppercase;
 }
-
-
-.header-divider {
-    position: absolute;
-    width: 100vw; /* На всю ширину viewport */
-    /* left: calc(-50vw + 720px);  */
-    top: 83px;
-    border-top: 1px solid #FFFFFF;
-    transform: rotate(-0.04deg);
-    z-index: 999;
-}
-
-
 
 .main-nav {
     display: flex;
-    gap: 37px; /* Расстояние между пунктами */
+    gap: 37px;
     position: absolute;
     top: 41px;
     left: 583px;
-    width: auto; /* Hug content */
-    height: 19px;
     margin: 0;
     padding: 0;
     list-style: none;
 }
 
 .main-nav li a {
-    color: #FFFFFF; /* Белый цвет текста */
+    color: #FFFFFF;
     text-decoration: none;
-    font-family: 'Inter', sans-serif;
+    font-family: 'Muller', sans-serif;
     font-size: 16px;
     font-weight: 400;
     transition: color 0.3s ease;
 }
 
 .main-nav li a:hover {
-    color: #B6B6B6; /* Цвет при наведении */
+    color: #B6B6B6;
 }
 
-/* Основной контейнер */
-.account-icon {
+.header-divider {
     position: absolute;
-    width: 28px;
-    height: 45.16px;
-    top: 33px;
-    left: 1369px;
-    z-index: 1000;
+    width: 100vw;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 83px;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-/* Круг (голова) */
-.account-avatar {
-    position: absolute;
-    width: 15.35px;
-    height: 15.35px;
-    top: 0;
-    left: 6.32px;
-    background-color: rgba(255, 255, 255, 0.9);
-    border-radius: 50%;
+.login-icon{
+
 }
 
-/* Полукруг (плечи) - теперь с верхним скруглением */
-.account-shoulders {
-    position: absolute;
-    width: 28px;
-    height: 14px;
-    bottom: 14px;
-    left: 0;
-    background-color: rgba(255, 255, 255, 0.9);
-    border-radius: 14px 14px 0 0; /* Скругление ТОЛЬКО сверху */
-    overflow: hidden; /* Важно для корректного отображения */
-}
-
-/* Для корректного отображения основного контента */
 main {
-    margin-top: 120px; /* Отступ ниже линии */
+    margin-top: 120px;
+    padding-bottom: 80px;
 }
 
-/* Стиль для заголовка "О нас" */
+.about-section {
+    padding-top: 150px;
+}
+
 .about-header {
-    position: absolute;
-    top: 1052px;
-    left: 658px;
-    width: 124px;
-    height: 54px;
-    font-family: 'Inter', sans-serif;
-    font-weight: 300;
+    font-family: 'Druk Wide Cyr', sans-serif;
     font-size: 45px;
-    line-height: 54px;
-    color: #000000;
-    margin: 0;
-    padding: 0;
+    line-height: 1.2;
+    text-align: center;
+    margin-bottom: 50px;
+    text-transform: uppercase;
 }
 
-/* Стиль для линии (line_2) */
-.line_2 {
-    position: absolute;
+.line {
     width: 156px;
-    top: 1429px;
-    left: 642px;
-    border-top: 1px solid #000000; /* Горизонтальная линия */
+    margin: 40px auto;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
 }
-.line_3 {
-    position: absolute;
-    width: 156px;
-    top: 3187px;
-    left: 642px;
-    border-top: 1px solid #000000; /* Горизонтальная линия */
-}
-/* Стиль для текста "Зарегистрируйтесь" */
+
 .register-text h3 {
-    position: absolute;
-    top: 1577.62px;  /* Уточните значение, возможно опечатка (1577px?) */
-    left: 98px;
-    width: 430px;
-    height: 54px;
-    font-family: 'Inter', sans-serif;
-    font-weight: 300;
+    font-family: 'Druk Wide Cyr', sans-serif;
     font-size: 45px;
-    line-height: 54px;
-    color: #000000;
-    margin: 0;
-    padding: 0;
-    transform: rotate(0.44deg); /* Небольшой поворот */
-}
-
-/* Стиль для кнопки регистрации */
-.register-button {
-    position: absolute;
-   top: 1680px;  /* узнать у ули позицию кнопки регистрации */
-    left: 100px;
+    line-height: 1.2;
+    margin-bottom: 30px;
+    text-transform: uppercase;
 }
 
 .register-button button {
-    padding: 10px 20px;
-    font-family: 'Inter', sans-serif;
+    padding: 15px 30px;
+    font-family: 'Muller', sans-serif;
+    font-size: 16px;
+    background-color: #FFFFFF;
+    color: #171717;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.register-button button:hover {
     background-color: #B6B6B6;
-    color: #000000;
-    border: none;
-    cursor: pointer;
 }
 
-/* Заголовок "Наши услуги" */
+.services-section {
+    padding: 80px 0;
+}
+
 .services-title {
-    position: absolute;
-    top: 2185px;
-    left: 580px;
-    width: 320px;
-    height: 73px;
-    font-family: 'Inter', sans-serif;
-    font-weight: 300;
+    font-family: 'Druk Wide Cyr', sans-serif;
     font-size: 45px;
-    line-height: 73px;  /* = height (100%) */
-    color: #000000;
-    margin: 0;
-    padding: 0;
-    white-space: nowrap;
+    line-height: 1.2;
+    text-align: center;
+    margin-bottom: 50px;
+    text-transform: uppercase;
 }
-/* Стили для текста "Онлайн-запись" */
+
+#reserve {
+    text-align: center;
+    padding: 80px 0;
+}
+
+#reserve h2 {
+    margin-bottom: 30px;
+}
+
 #reserve p {
-    position: absolute;
-    top: 3252px;
-    left: 552px;
-    width: 335px;
-    height: 54px;
-    font-family: 'Inter', sans-serif;
-    font-weight: 300;
-    font-size: 45px;
-    line-height: 54px;
-    color: #000000;
+    font-family: 'Muller', sans-serif;
+    font-size: 18px;
+    margin-bottom: 30px;
+}
+
+#feedback {
+    padding: 80px 0;
     text-align: center;
-    margin: 0;
-    padding: 0;
 }
 
-/* Стили для кнопки (если нужно оставить) */
-#reserve a {
-    
-    position: absolute;
-    top: 3466px; /* Под текстом */
-    left: 583px;
-    text-decoration: none;
+#feedback h2 {
+    margin-bottom: 50px;
 }
 
-#reserve button {
-    width: 273px;
-    height: 84px;
-    padding: 10px 20px;
-    font-family: 'Inter', sans-serif;
-    background: #908E8E;
-    color:#000 ;
-    border: none;
-    cursor: pointer;
-}
-
-/* Стили для текста "Отзывы" */
-#feedback p {
-    position: absolute;
-    top: 3684px;
-    left: 634px;
-    width: 171px;  /* Исправлено с "17lpx" на 171px */
-    height: 54px;
-    font-family: 'Inter', sans-serif;
-    font-weight: 300;
-    font-size: 45px;
-    line-height: 54px;  /* 100% высоты */
-    color: #000000;
+#contacts {
+    padding: 80px 0;
     text-align: center;
-    margin: 0;
-    padding: 0;
-    white-space: nowrap;
 }
 
-/* Стили для заголовка "Наши контакты" */
 #contacts h2 {
-    position: absolute;
-    top: 4768px;
-    left: 98px;
-    width: 335px;
-    height: 54px;
-    font-family: 'Inter', sans-serif;
-    font-weight: 300;
-    font-size: 45px;
-    line-height: 54px; /* 100% высоты */
-    color: #000000;
-    text-align: center;
-    margin: 0;
-    padding: 0;
-    white-space: nowrap;
+    margin-bottom: 30px;
 }
 
-/* Стили для заголовка "Как нас найти" */
-#location h2 {
-    position: absolute;
-    top: 5386px;
-    left: 567px;
-    width: 305px;
-    height: 54px;
-    font-family: 'Inter', sans-serif;
-    font-weight: 300;
-    font-size: 45px;
-    line-height: 54px; /* 100% высоты */
-    color: #000000;
+#location {
+    padding: 80px 0;
     text-align: center;
-    margin: 0;
-    padding: 0;
-    white-space: nowrap;
+}
+
+#location h2 {
+    margin-bottom: 30px;
 }

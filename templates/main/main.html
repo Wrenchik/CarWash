@@ -4,10 +4,10 @@
 
 {% block content %}
 
+
     <img src="{% static 'img/main1.png' %}" alt="ГлавноеФото1" width="150">
     
     <div class="line_1"></div>
-    <!-- Секция "О нас" -->
     <section id="about">
         <h2 class="about-header">О нас</h2>
         <p>Описание компании...</p>
@@ -15,28 +15,44 @@
 
     {% include "includes/registration.html" %}
     {% include "includes/services.html" %}
-
-<!-- / -->
- <!--  -->
     
     <section id="reserve">
-        <p>Онлайн-запись</p> 
-        <a href="{% url 'booking_page' %}"><button>Записаться</button></a>
+        <h2>Онлайн-запись</h2>
+        <a href="{% url 'booking_page' %}" class="btn">Записаться</a>
+        <img src="{% static 'img/reserve.png' %}" alt="Бронь" width="645px">
     </section>
 
     <section id="feedback">
-        <p>Отзывы</p>
-    </section>
-
-    <section id="contacts">
-        
-        <h2>Наши контакты</h2>
-        <p>Телефон</p>
-        <p>email</p>
+        <h2>Отзывы</h2>
+        {% for review in reviews %}
+        <div class="review">
+            <div class="review-header">
+                <span>{{ review.name }}</span>
+                {% if review.car_model %}
+                <span>{{ review.car_model }}</span>
+                {% endif %}
+                <span class="review-date">{{ review.date|date:"d.m.Y" }}</span>
+            </div>
+            <div class="review-text">
+                {{ review.text }}
+            </div>
+            {% if review.img %}
+            <div class="review-image">
+                <img src="{{ review.img.url }}" alt="Фото отзыва">
+            </div>
+            {% endif %}
+        </div>
+        {% endfor %}
     </section>
 
     <section id="location">
         <h2>Как нас найти</h2>
-        <div id="map">Карта здесь</div>
+        <ul>
+            <li>г.Екатеринбург ул.</li>
+            <li>+7(343)300-89-22</li>
+            <li>ПН-ВС 11:00-21:00</li>
+            <li>cleanlab@mail.ru</li>
+        </ul>
+        <img src="{% static 'img/map.png' %}" alt="Карта" width="1440px">
     </section>
 {% endblock %}

@@ -7,26 +7,17 @@
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300&display=swap" rel="stylesheet">
     
-    
 </head>
 
 
 <body>
-    
+
     <header>
         <div class="logo-container">
             <a href="{% url 'main_page' %}" class="logo-link">CLEANLAB</a>
         </div>
         <nav>
-            <!-- Навигация остается как есть -->
             <ul>
-                {% if user.is_authenticated %}
-                    <li><a href="{% url 'logout' %}">Выйти</a></li>
-                {% else %}
-                    <li><a href="{% url 'login' %}">Вход</a></li>
-                    <li><a href="{% url 'register' %}">Регистрация</a></li>
-                {% endif %}
-               
                 <nav>
                     <ul class="main-nav">
                         <li><a href="#">Услуги</a></li>
@@ -35,22 +26,20 @@
                         <li><a href="#">О нас</a></li>
                     </ul>
                 </nav>
-                <div class="account-icon">
-                    <div class="account-avatar"></div>
-                    <div class="account-shoulders"></div>
-                </div>
-                
-                
+                <img class='login-icon' src="{% static 'img/login_icon.svg' %}" alt="Иконка входа" width="28">
             </ul>
         </nav>
     </header>
     <div class="header-divider"></div>
-        
+
     </div>
     
     <main>
         {% block content %}{% endblock %}
     </main>
 
+    <footer>
+        <div>CLEANLAB</div>
+    </footer>
 </body>
 </html>
