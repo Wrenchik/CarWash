@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import User
+from accounts.models import CustomUser
 
 class Booking(models.Model):
     SERVICE_CHOICES = [
@@ -7,7 +7,7 @@ class Booking(models.Model):
         ('deluxe', 'Делюкс'),
         # …
     ]
-    user    = models.ForeignKey(User, on_delete=models.CASCADE)
+    user    = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     service = models.CharField(max_length=20, choices=SERVICE_CHOICES)
     date    = models.DateField()
     time    = models.TimeField()
