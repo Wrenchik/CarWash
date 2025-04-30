@@ -28,7 +28,8 @@ h2 {
     font-family: 'Druk Wide Cyr', sans-serif;
     font-size: 30px;
     font-weight: 500;
-    margin-top: 0;
+    margin: 0px;
+    padding: 0px;
     color: #FFFFFF;
 }
 
@@ -410,58 +411,132 @@ h2 {
 }
 
 .services-section {
-    padding: 80px 0;
 }
 
 .services-title {
     font-family: 'Druk Wide Cyr', sans-serif;
-    font-size: 45px;
+    font-size: 30px;
     line-height: 1.2;
     text-align: center;
-    margin-bottom: 50px;
     text-transform: uppercase;
 }
 
+.reserve-btn{
+    font-size: 25px;
+    margin-top: 0px;
+}
+
+/*Booking*/
+
 #reserve {
+    font-family: 'Druk Wide Cyr', sans-serif;
+    font-size: 30px;
     text-align: center;
-    padding: 80px 0;
+    justify-content: center;
+    padding-bottom: 50px;
 }
 
 #reserve h2 {
-    margin-bottom: 30px;
+    weight: 500;
+    margin-top: 41px;
+    margin-bottom: 25px;
 }
 
-#reserve p {
-    font-family: 'Muller', sans-serif;
-    font-size: 18px;
-    margin-bottom: 30px;
+.image-button-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 1200px;
+    margin: 0 auto;
+    transform: translateX(-225px);
+
 }
+
+.reserve-image {
+    margin-top: 35px;
+    width: 850px;
+}
+
+.reserve-btn{
+    padding: 30px 30px;
+    font-size: 25px;
+    margin-top: -90px;
+    transform: translateX(-50px);
+}
+
+.reserve-btn::before{
+    width: 25%;
+}
+
+/*Reviews*/
 
 #feedback {
     padding: 80px 0;
     text-align: center;
+    background-color: #434343;
 }
 
 #feedback h2 {
     margin-bottom: 50px;
 }
 
-#contacts {
-    padding: 80px 0;
-    text-align: center;
-}
-
-#contacts h2 {
-    margin-bottom: 30px;
-}
+/*Contacts*/
 
 #location {
-    padding: 80px 0;
     text-align: center;
 }
 
 #location h2 {
-    margin-bottom: 30px;
+    font-family: 'Druk Wide Cyr', sans-serif;
+    font-size: 30px;
+    padding-top: 68px;
+    padding-bottom: 67px;
+    background-color: #616161;
+}
+
+#location ul {
+    display: flex;
+    justify-content: center;
+    gap: 72px;
+    flex-wrap: wrap;
+    list-style-type: none;
+    margin-top: 71px;
+    margin-bottom: 41px;
+}
+
+#location li a{
+    color: #FFFFFF;
+    text-decoration: none;
+    font-family: 'Muller', sans-serif;
+    font-size: 25px;
+    width: 245px;
+    text-align: center;
+    transition: all 0.3s ease;
+    border-radius: 4px;
+}
+
+#location li a:hover {
+    color: #711919;
+    transform: scale(1.1);
+    z-index: 1;
+}
+
+.location-divider{
+    width: 50%;
+    margin: 0 auto;
+}
+
+#location img{
+    margin-top: 90px;
+    margin-bottom: 90px;
+}
+
+/*Footer*/
+
+footer a{
+    position: relative;
+    padding: 90px 0 45px 33px;
+    margin-top: 90px;
 }
 
 input:-webkit-autofill,

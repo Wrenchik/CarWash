@@ -11,7 +11,7 @@
           <div class="subheadline">Где технологии и внимание к деталям создают эталонный результат</div>
           <a href="{% url 'booking_page' %}" class="one-click-btn">
             <span class="red-block"></span>
-            Быстрая запись в один клик <span class="arrow">→</span>
+            Быстрая запись в один клик <span class="arrow">⟶</span>
           </a>
         </div>
         <div class="images">
@@ -36,8 +36,14 @@
     
     <section id="reserve">
         <h2>Онлайн-запись</h2>
-        <a href="{% url 'booking_page' %}" class="btn">Записаться</a>
-        <img src="{% static 'img/reserve.png' %}" alt="Бронь" width="645px">
+        <div class="header-divider"></div>
+        <div class="image-button-wrapper">
+            <img src="{% static 'img/reserve.png' %}" alt="Бронь" class="reserve-image">
+            <a href="{% url 'booking_page' %}" class="one-click-btn reserve-btn">
+                Записаться
+                <span class="btn-arrow">→</span>
+            </a>
+        </div>
     </section>
 
     <section id="feedback">
@@ -66,11 +72,28 @@
     <section id="location">
         <h2>Как нас найти</h2>
         <ul>
-            <li>г.Екатеринбург ул.</li>
-            <li>+7(343)300-89-22</li>
-            <li>ПН-ВС 11:00-21:00</li>
-            <li>cleanlab@mail.ru</li>
+            <li class="contact-item">
+                <a href="#" class="contact-link">
+                    г. Екатеринбург
+                </a>
+            </li>
+            <li class="contact-item">
+                <a href="#" class="contact-link">
+                    +7 (343) 300-89-22
+                </a>
+            </li>
+            <li class="contact-item">
+                <a href="#" class="contact-link">
+                    ПН-ВС 11:00-21:00
+                </a>
+            </li>
+            <li class="contact-item">
+                <a href="#" class="contact-link">
+                    cleanlab@mail.ru
+                </a>
+            </li>
         </ul>
+        <div class="header-divider location-divider"></div>
         <img src="{% static 'img/map.png' %}" alt="Карта" width="1440px">
     </section>
 {% endblock %}
