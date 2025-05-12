@@ -2,15 +2,48 @@
 
 <section id="services">
     <h2 class="services-title">Наши услуги</h2>
-    <div class="services-grid">
-        {% for service in services %}
-            <div class="service-card">
-                <img src="{% static 'img/services/' %}{{ service.name|slugify }}.jpg" alt="{{ service.name }}" class="service-image">
-                <div class="service-info">
-                    <h3>{{ service.name }}</h3>
-                    <p>{{ service.price }} руб.</p>
+    <div class="arrow-pagination">
+            <a href="#" class="arrow-right" data-page="1">
+                <svg id="next-services" width="25" height="120" viewBox="0 0 25 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M1 1L23.5 61L1 119.5" stroke="white"/>
+                </svg>
+            </a>
+    </div>
+    <div id="services-container">
+        <div class="services-row top-row">
+            {% for service in service_page_obj.object_list|slice:":2" %}
+                <div class="service-card">
+                    {% if service.image %}
+                        <img src="{{ service.image.url }}" alt="{{ service.name }}" class="service-image">
+                    {% else %}
+                        <img src="{% static 'img/default.jpg' %}" alt="Нет изображения" class="service-image">
+                    {% endif %}
+                    <div class="service-info">
+                        <p class ="service-name">{{ service.name }}</p>
+                        <p class="service-price">
+                            от {{ service.price_from|floatformat:0 }} – {{ service.price_to|floatformat:0 }}
+                        </p>
+                    </div>
                 </div>
-            </div>
-        {% endfor %}
+            {% endfor %}
+        </div>
+
+        <div class="services-row bottom-row">
+            {% for service in service_page_obj.object_list|slice:"2:4" %}
+                <div class="service-card">
+                    {% if service.image %}
+                        <img src="{{ service.image.url }}" alt="{{ service.name }}" class="service-image">
+                    {% else %}
+                        <img src="{% static 'img/default.jpg' %}" alt="Нет изображения" class="service-image">
+                    {% endif %}
+                    <div class="service-info">
+                        <p class="service-name">{{ service.name }}</p>
+                        <p class="service-price">
+                            от {{ service.price_from|floatformat:0 }} – {{ service.price_to|floatformat:0 }}
+                        </p>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
     </div>
 </section>

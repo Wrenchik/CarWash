@@ -8,14 +8,29 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 
 class RegisterView(CreateView):
     form_class = UserRegisterForm
-    template_name = 'registration/register.html'
-    success_url = reverse_lazy('login')  # После успешной регистрации — перенаправление на логин
+    template_name = 'accounts/register.html'
+    success_url = reverse_lazy('main_page')
+
+    def form_valid(self, form):
+        user = form.save()
+        login(self.request, user)
+
+        # Отправка email
+        send_mail(
+            subject='Новая регистрация',
+            message=f'Пользователь {user.username} зарегистрировался с почтой {user.email} и телефоном {user.phone}',
+            from_email=settings.DEFAULT_FROM_EMAIL,
+            recipient_list=['cleanlabekb@gmail.com'],
+        )
+
+        messages.success(self.request, "Вы успешно зарегистрированы!")
+        return redirect(self.success_url)
 
 class CustomLoginView(LoginView):
     template_name = 'registration/login.html'
 
 class CustomLogoutView(LogoutView):
-    next_page = 'login'  # После логаута — обратно на страницу логина
+    next_page = 'login'
 
 class BookingCreateView(LoginRequiredMixin, CreateView):
     model = Booking
