@@ -40,28 +40,26 @@ document.addEventListener('DOMContentLoaded', function () {
                 console.error('Error:', error);
             });
     });
-});
 
-document.addEventListener('DOMContentLoaded', function () {
-  const profileIcon = document.querySelector('.login-link');
-  const drawer = document.getElementById('profileDrawer');
-  const drawerContent = drawer.querySelector('.drawer-content');
-  const closeBtn = document.getElementById('closeDrawer');
+    const profileIcon = document.querySelector('.login-link');
+    const drawer = document.getElementById('profileDrawer');
+    const drawerContent = drawer.querySelector('.drawer-content');
+    const closeBtn = document.getElementById('closeDrawer');
 
-  profileIcon.addEventListener('click', function (e) {
-    e.preventDefault();
-    drawer.classList.add('open');
-  });
+    profileIcon.addEventListener('click', function (e) {
+        e.preventDefault();
+        drawer.classList.add('open');
+    });
 
-  closeBtn.addEventListener('click', function () {
-    drawer.classList.remove('open');
-  });
+    closeBtn.addEventListener('click', function () {
+        drawer.classList.remove('open');
+    });
 
-  document.addEventListener('click', function (e) {
-    const isClickInside = drawer.contains(e.target);
-    const isButton = profileIcon.contains(e.target);
-    if (!isClickInside && !isButton) {
-      drawer.classList.remove('open');
-    }
-  });
+    document.addEventListener('click', function (e) {
+        const isClickInside = drawer.contains(e.target);
+        const isButton = profileIcon.contains(e.target);
+        if (!isClickInside && !isButton) {
+            drawer.classList.remove('open');
+        }
+    });
 });
