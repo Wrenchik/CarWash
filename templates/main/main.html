@@ -9,10 +9,15 @@
         <div class="text-block">
           <div class="headline">CleanLab —<br>формула идеальной чистоты</div>
           <div class="subheadline">Где технологии и внимание к деталям создают эталонный результат</div>
-          <a href="{% url 'booking_page' %}" class="one-click-btn">
+            <div class="booking-overlay" id="booking-overlay"></div>
+            <a class="one-click-btn" id="booking-toggleDrawer">
             <span class="red-block"></span>
             Быстрая запись в один клик <span class="arrow">⟶</span>
-          </a>
+            </a>
+            <div id="booking-drawer" class="booking-drawer">
+                <div class="rectangle"></div>
+                {% include "booking/booking.html" %}
+            </div>
         </div>
         <div class="images">
           <img src="{% static 'img/main1.png' %}" alt="ГлавноеФото1">
@@ -39,9 +44,8 @@
         <div class="header-divider"></div>
         <div class="image-button-wrapper">
             <img src="{% static 'img/reserve.png' %}" alt="Бронь" class="reserve-image">
-            <a href="{% url 'booking_page' %}" class="one-click-btn reserve-btn">
-                Записаться
-                <span class="btn-arrow">→</span>
+            <a class="one-click-btn reserve-btn" id="openModalBtn">
+                Записаться <span class="btn-arrow">→</span>
             </a>
         </div>
     </section>

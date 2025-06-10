@@ -10,7 +10,6 @@ class CustomUserAdmin(admin.ModelAdmin):
         'phone',
         'email',
         'is_staff',
-        'is_active',
         'is_superuser',
         'get_groups',
         'get_user_permissions',

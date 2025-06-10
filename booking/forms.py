@@ -1,18 +1,10 @@
 from django import forms
-from .models import Booking
+from .models import Booking, Service
 
 class BookingForm(forms.ModelForm):
-    date = forms.DateField(
-        label='Дата (дд.мм.гггг)',
-        input_formats=['%d.%m.%Y'],
-        widget=forms.DateInput(format='%d.%m.%Y')
-    )
-    time = forms.TimeField(
-        label='Время (чч:мм)',
-        input_formats=['%H:%M'],
-        widget=forms.TimeInput(format='%H:%M')
-    )
-
     class Meta:
         model = Booking
-        fields = ['service', 'date', 'time', 'comment']
+        fields = ['date', 'start_time', 'services', 'comment', 'payment_method']
+        widgets = {
+            'services': forms.CheckboxSelectMultiple(),
+        }

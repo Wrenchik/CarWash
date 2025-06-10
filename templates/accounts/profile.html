@@ -1,10 +1,54 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% load static %}
+<div class="drawer-content">
+        {% if user.is_authenticated %}
+          <h2 class="profile-title">Профиль</h2>
+          <div class="profile-info">
+              <svg class="profile-icon" width="80" height="60" viewBox="0 0 28 46" xmlns="http://www.w3.org/2000/svg" color="white">
+                <circle cx="14.0001" cy="7.67742" r="7.67742" fill="currentColor"/>
+                <path d="M28 31.1613C28 27.4482 26.525 23.8873 23.8995 21.2618C21.274 18.6363 17.713 17.1613 14 17.1613C10.287 17.1613 6.72602 18.6362 4.10051 21.2618C1.475 23.8873 5.60652e-07 27.4482 0 31.1613L14 31.1613H28Z"
+                    fill="currentColor"/>
+              </svg>
+              <ul>
+                  <li class="username">{{ user.username }}</li>
+                  <li class="profile-li">{{ user.email }}</li>
+                  <li class="profile-li">{{ user.phone }}</li>
+              </ul>
+          </div>
+            <div class="review-form">
+                <div class="red-rectangle red-review-rectangle"></div>
+                <div class="review-form-container">
+                    <div class="review-title">Напишите отзыв</div>
+                    <form method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="id_car_model">Модель авто</label>
+                            <input type="text" id="id_car_model" name="car_model">
+                        </div>
 
-</body>
-</html>
+                        <div class="form-group">
+                            <label for="id_text">Текст отзыва</label>
+                            <textarea id="id_text" name="text" required></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Фото (необязательно)</label>
+                            <div class="file-upload">
+                                <input type="file" id="id_img" name="img" accept="image/*">
+                                <label for="id_img">Выберите файл</label>
+                                <span class="file-name" id="fileName"></span>
+                            </div>
+                        </div>
+                <button type="submit" class="submit-btn">Отправить отзыв</button>
+            </form>
+            </div>
+        </div>
+        <form method="post" action="{% url 'logout' %}">
+            {% csrf_token %}
+            <button type="submit" class="logout-button registration-button">Выйти</button>
+        </form>
+        {% else %}
+          <h2>Добро пожаловать!</h2>
+          <a href="{% url 'login' %}">Войти</a><br>
+          <a href="{% url 'register' %}">Зарегистрироваться</a>
+        {% endif %}
+</div>

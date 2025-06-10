@@ -29,34 +29,58 @@ html {
 }
 
 .drawer {
-  position: fixed;
-  top: 0;
-  right: -50%;
-  width: 50%;
-  height: 100%;
-  background-color: #fff;
-  box-shadow: -2px 0 5px rgba(0,0,0,0.3);
-  overflow-y: auto;
-  transition: right 0.3s ease-in-out;
-  z-index: 1000;
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 50vw;
+    height: 100%;
+    background-color: #616161;
+    box-shadow: -2px 0 10px rgba(0, 0, 0, 0.5);
+    transform: translateX(100%);
+    transition: transform 0.3s ease-in-out;
+    z-index: 1000;
+    padding-top: 33px;
+    padding-left: 58px;
+}
+
+.drawer-content{
+    width: 100%;
+    padding-right: 50px;
 }
 
 .drawer.open {
-  right: 0;
-}
-
-.drawer-content {
-  padding: 20px;
-  position: relative;
+    transform: translateX(0);
+    display: flex;
 }
 
 .drawer-close {
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  font-size: 24px;
-  cursor: pointer;
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+    position: absolute;
+    top: 10px;
+    right: 20px;
 }
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.4);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease-in-out;
+  z-index: 1000;
+}
+
+.overlay.visible {
+  opacity: 1;
+  pointer-events: all;
+}
+
+
 
 h2 {
     font-family: 'Druk Wide Cyr', sans-serif;
@@ -65,6 +89,230 @@ h2 {
     margin: 0px;
     padding: 0px;
     color: #FFFFFF;
+}
+
+/*Profile*/
+
+.rectangle {
+    width: 63px;
+    height: 183px;
+    background-color: #711919;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.profile-title {
+    color: #000000;
+    font-size: 30px;
+}
+
+.profile-icon {
+    align-self: center;
+}
+
+.profile-info{
+    display: flex;
+    align-items: flex-start;
+    gap: 34px;
+    margin-top: 75px;
+    align-items: center;
+}
+
+.profile-info ul{
+    list-style: none;
+    padding-left: 0;
+    margin-top: 0;
+}
+
+.profile-li{
+    font-family: 'Muller', sans-serif;
+    font-size: 20px;
+    font-weight: 400;
+    color: #000000;
+    margin-bottom: 5px;
+}
+
+.username {
+    font-family: 'Druk Wide Cyr', sans-serif;
+    font-size: 25px;
+    font-weight: 500;
+    color: #FFFFFF;
+    margin-bottom: 13px;
+}
+
+/*Review form*/
+
+.review-section {
+    position: relative;
+    overflow: hidden;
+    background-color: #fff;
+}
+
+.review-form {
+    flex: 1;
+    display: flex;
+    margin-top: 50px;
+    justify-content: flex-start;
+    align-items: flex-start;
+    width: 700px;
+}
+
+.review-form form{
+    background-color: #909090;
+    margin-top: 23px;
+    padding: 20px;
+    width: 700px;
+}
+
+.review-content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    justify-content: space-between;
+    width: 1261px;
+}
+
+.review-title {
+    font-family: 'Druk Wide Cyr', sans-serif;
+    font-size: 25px;
+    font-weight: 500;
+}
+
+.review-description {
+    font-family: 'Muller', sans-serif;
+    font-size: 30px;
+}
+
+.review-right {
+    flex: 1;
+    display: flex;
+    margin-top: 50px;
+    justify-content: flex-start;
+    align-items: flex-start;
+    width: 700px;
+}
+
+.review-form label {
+    display: block;
+    font-family: 'Muller', sans-serif;
+    font-size: 19px;
+    color: #FFFFFF;
+    margin-top: 5px;
+}
+
+.review-form input[type="text"],
+.review-form textarea {
+    width: 600px;
+    padding: 10px;
+    border: none;
+    border-bottom: 1px solid #ccc;
+    background-color: transparent;
+    color: #FFFFFF;
+    font-family: 'Muller', sans-serif;
+    font-size: 16px;
+    outline: none;
+    box-sizing: border-box;
+}
+
+.review-form textarea {
+    height: 120px;
+    resize: vertical;
+}
+
+.file-upload input[type="file"] {
+    position: absolute;
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    z-index: -1;
+}
+
+.file-upload label {
+    display: inline-block;
+    padding: 8px 15px;
+    background-color: rgba(255, 255, 255, 0.2);
+    color: #FFFFFF;
+    font-family: 'Muller', sans-serif;
+    font-size: 16px;
+    cursor: pointer;
+    border: 1px dashed rgba(255, 255, 255, 0.3);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.file-name {
+    display: block;
+    margin-top: 8px;
+    font-family: 'Muller', sans-serif;
+    font-size: 14px;
+    color: #d3d3d3;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.file-upload label::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 3%;
+    height: 100%;
+    background-color: #711919;
+    z-index: -1;
+    transition: width 0.3s ease;
+}
+
+.file-upload:hover label::after {
+    width: 100%;
+}
+
+.file-upload.has-file .file-name {
+    opacity: 1;
+}
+
+.submit-btn {
+    display: inline-block;
+    padding: 12px 25px;
+    margin-top: 20px;
+    background-color: rgba(255, 255, 255, 0.2);
+    color: #FFFFFF;
+    font-family: 'Muller', sans-serif;
+    font-size: 18px;
+    font-weight: 500;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    border: none;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    transition: all 0.3s ease;
+}
+
+.submit-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 3%;
+    background-color: #711919;
+    z-index: -1;
+    transition: width 0.3s ease;
+}
+
+.submit-btn:hover::before {
+    width: 100%;
+}
+
+.review-form input::placeholder,
+.review-form textarea::placeholder {
+    color: #FFFFFF;
+    font-size: 14px;
+    opacity: 1;
 }
 
 /*Header*/
@@ -130,7 +378,7 @@ h2 {
     height: 1px;
     margin-top: 22.9px;
     background-color: #FFFFFF;
-    width: 100vw;
+    width: 100%;
 }
 
 /*Main*/
@@ -290,6 +538,16 @@ h2 {
     margin-right: 22px;
 }
 
+.red-review-rectangle {
+    width: 10px;
+    height: 470px;
+    height: 450px;
+    background-color: #711919;
+    flex-shrink: 0;
+    margin-right: 22px;
+}
+
+
 .registration-container {
     display: flex;
     justify-content: center;
@@ -333,6 +591,7 @@ h2 {
     justify-content: flex-start;
     align-items: flex-start;
     width: 490px;
+     color: #FFFFFF;
 }
 
 .form-section-title{
@@ -593,6 +852,103 @@ h2 {
     width: 25%;
 }
 
+.booking-drawer {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 20vw;
+    height: 60vh;
+    background-color: #171717;
+    box-shadow: -2px 0 10px rgba(0, 0, 0, 0.5);
+    transform: translate(-50%, -50%) scale(0.95);
+    opacity: 0;
+    transition: transform 0.3s ease-in-out;
+    z-index: 1000;
+    padding: 33px 58px;
+    overflow-y: auto;
+}
+
+.booking-drawer.open {
+    transform: translate(-50%, -50%) translateX(0);
+    display: flex;
+    flex-direction: column;
+    opacity: 1;
+}
+
+.booking-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(255, 255, 255, 0.4);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease-in-out;
+    z-index: 999;
+}
+
+.booking-overlay.visible {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.booking-form {
+    background-color: #909090;
+    padding: 20px;
+    width: 100%;
+    max-width: 700px;
+    color: white;
+    font-family: 'Muller', sans-serif;
+    font-size: 16px;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.booking-form label {
+    display: block;
+    margin-top: 15px;
+    font-size: 19px;
+    color: #FFFFFF;
+}
+
+.booking-form input[type="date"],
+.booking-form select,
+.booking-form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: none;
+    border-bottom: 1px solid #ccc;
+    background-color: transparent;
+    color: white;
+    font-size: 16px;
+    outline: none;
+    box-sizing: border-box;
+    resize: vertical;
+}
+
+.booking-form textarea {
+    height: 120px;
+}
+
+.booking-form button {
+    margin-top: 20px;
+    padding: 12px 25px;
+    background-color: rgba(255, 255, 255, 0.2);
+    color: #FFFFFF;
+    font-family: 'Muller', sans-serif;
+    font-size: 18px;
+    font-weight: 500;
+    border: none;
+    cursor: pointer;
+    border-radius: 3px;
+    transition: background-color 0.3s ease;
+}
+
+.booking-form button:hover {
+    background-color: #711919;
+}
 
 /*Reviews*/
 
@@ -676,7 +1032,17 @@ input:-webkit-autofill:focus,
 input:-webkit-autofill:active {
     -webkit-box-shadow: 0 0 0 1000px #171717 inset !important;
     box-shadow: 0 0 0 1000px #171717 inset !important;
-    -webkit-text-fill-color: #fff !important;
+    -webkit-text-fill-color: #FFFFFF !important;
     background-color: transparent !important;
     transition: background-color 5000s ease-in-out 0s;
+}
+
+.logout-button{
+    margin-left: 0px;
+    font-size: 25px;
+}
+
+.form-group input {
+    color: #FFFFFF !important;
+    caret-color: #FFFFFF;
 }

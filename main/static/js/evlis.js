@@ -1,65 +1,29 @@
 document.addEventListener('DOMContentLoaded', function () {
-    const nextServicesBtn = document.getElementById('next-services');
-    nextServicesBtn.addEventListener('click', function (e) {
-        e.preventDefault();
-        const page = this.dataset.page;
+    const drawer = document.getElementById('drawer');
+    const overlay = document.getElementById('overlay');
+    const toggleBtn = document.getElementById('toggleDrawer');
 
-        fetch(`/load-services/?page=${page}`)
-            .then(response => response.json())
-            .then(data => {
-                document.getElementById('services-container').innerHTML = data.html;
-
-                if (data.has_next) {
-                    this.dataset.page = data.next_page;
-                } else {
-                    this.dataset.page = 1;
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-            });
+    toggleBtn.addEventListener('click', () => {
+    const isOpen = drawer.classList.toggle('open');
+    overlay.classList.toggle('visible', isOpen);
     });
 
-    const nextReviewsBtn = document.getElementById('next-reviews');
-    nextReviewsBtn.addEventListener('click', function (e) {
-        e.preventDefault();
-        const page = this.dataset.page;
-
-        fetch(`/load-reviews/?page=${page}`)
-            .then(response => response.json())
-            .then(data => {
-                document.getElementById('reviews-container').innerHTML = data.html;
-
-                if (data.has_next) {
-                    this.dataset.page = data.next_page;
-                } else {
-                    this.dataset.page = 1;
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-            });
+    overlay.addEventListener('click', () => {
+    drawer.classList.remove('open');
+    overlay.classList.remove('visible');
     });
 
-    const profileIcon = document.querySelector('.login-link');
-    const drawer = document.getElementById('profileDrawer');
-    const drawerContent = drawer.querySelector('.drawer-content');
-    const closeBtn = document.getElementById('closeDrawer');
+    const bookingDrawer = document.getElementById('booking-drawer');
+    const bookingOverlay = document.getElementById('booking-overlay');
+    const bookingToggleBtn = document.getElementById('booking-toggleDrawer');
 
-    profileIcon.addEventListener('click', function (e) {
-        e.preventDefault();
-        drawer.classList.add('open');
+    bookingToggleBtn.addEventListener('click', () => {
+    const bookingIsOpen = bookingDrawer.classList.toggle('open');
+    bookingOverlay.classList.toggle('visible', bookingIsOpen);
     });
 
-    closeBtn.addEventListener('click', function () {
-        drawer.classList.remove('open');
-    });
-
-    document.addEventListener('click', function (e) {
-        const isClickInside = drawer.contains(e.target);
-        const isButton = profileIcon.contains(e.target);
-        if (!isClickInside && !isButton) {
-            drawer.classList.remove('open');
-        }
+    bookingOverlay.addEventListener('click', () => {
+    bookingDrawer.classList.remove('open');
+    bookingOverlay.classList.remove('visible');
     });
 });

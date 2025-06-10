@@ -5,6 +5,7 @@ class Service(models.Model):
     price_from = models.DecimalField("Цена от", max_digits=8, decimal_places=2, default=0)
     price_to = models.DecimalField("Цена до", max_digits=8, decimal_places=2, default=0)
     image = models.ImageField(upload_to='services/', blank=True, null=True)
+    duration = models.PositiveIntegerField(help_text="Длительность в минутах")
 
     def __str__(self):
         return self.name

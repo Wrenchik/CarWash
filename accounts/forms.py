@@ -6,6 +6,17 @@ from django.contrib.auth import get_user_model
 User = get_user_model()
 
 class UserRegisterForm(UserCreationForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['username'].widget.attrs.pop('autofocus', None)
+
+    username = forms.CharField(
+        widget=forms.TextInput(attrs={
+            'class': 'form-control',
+            'required' : 'False',
+        })
+    )
+
     email = forms.EmailField(
         label='Email',
         required=True,
@@ -29,7 +40,15 @@ class UserRegisterForm(UserCreationForm):
         widgets = {
             'username': forms.TextInput(attrs={
                 'class': 'form-control',
-                'autofocus': True
+                'autofocus': False,
+            }),
+            'email': forms.EmailInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'example@mail.com'
+            }),
+            'phone': forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': '+7 (XXX) XXX-XX-XX'
             }),
         }
 
