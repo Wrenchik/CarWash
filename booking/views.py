@@ -4,7 +4,10 @@ from django.views import View
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import JsonResponse
 from .models import Booking
+from main.models import Service
 from .forms import BookingForm
+from datetime import datetime, time, timedelta
+from django.utils.dateparse import parse_date, parse_time
 
 def get_available_slots(date, selected_services, existing_bookings):
     work_start = time(11, 0)
@@ -36,7 +39,7 @@ class CreateBookingView(View):
     def post(self, request):
         data = request.POST
         user = request.user
-        service_ids = data.getlist('services[]')
+        service_ids = data.getlist('services')
         date = parse_date(data.get('date'))
         start_time = parse_time(data.get('start_time'))
         comment = data.get('comment', '')
@@ -63,7 +66,7 @@ class CreateBookingView(View):
 class AvailableSlotsView(View):
     def get(self, request):
         date_str = request.GET.get('date')
-        service_ids = request.GET.getlist('services[]')
+        service_ids = request.GET.getlist('services')
 
         if not date_str or not service_ids:
             return JsonResponse({'error': 'Недостаточно данных'}, status=400)
@@ -77,3 +80,11 @@ class AvailableSlotsView(View):
             return JsonResponse({'available_slots': [t.strftime('%H:%M') for t in available_slots]})
         except Exception as e:
             return JsonResponse({'error': str(e)}, status=500)
+
+class BookingPageView(TemplateView):
+    template_name = 'booking/booking.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['services'] = Service.objects.all()
+        return context

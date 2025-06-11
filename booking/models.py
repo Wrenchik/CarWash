@@ -1,6 +1,7 @@
 from django.db import models
 from accounts.models import CustomUser
 from main.models import Service
+from datetime import datetime, timedelta
 
 class Booking(models.Model):
     PAYMENT_CHOICES = [

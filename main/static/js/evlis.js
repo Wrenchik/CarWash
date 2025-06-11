@@ -27,3 +27,41 @@ document.addEventListener('DOMContentLoaded', function () {
     bookingOverlay.classList.remove('visible');
     });
 });
+
+document.getElementById('load-slots').addEventListener('click', function () {
+    const selectedServices = Array.from(document.querySelectorAll('input[name="services"]:checked')).map(el => el.value);
+    const date = document.getElementById('date').value;
+
+    if (!selectedServices.length || !date) {
+        alert('Выберите дату и хотя бы одну услугу.');
+        return;
+    }
+
+    const params = new URLSearchParams();
+    selectedServices.forEach(id => params.append('services', id));
+    params.append('date', date);
+
+    fetch(`/available-slots/?${params.toString()}`)
+        .then(res => res.json())
+        .then(data => {
+            const container = document.getElementById('slots-container');
+            container.innerHTML = '';
+
+            if (data.available_slots && data.available_slots.length) {
+                data.available_slots.forEach((slot, index) => {
+                    const id = `slot_${index}`;
+                    container.innerHTML += `
+                        <label for="${id}">
+                            <input type="radio" name="start_time" value="${slot}" id="${id}" required>
+                            ${slot}
+                        </label><br>
+                    `;
+                });
+            } else {
+                container.innerHTML = '<p>Нет доступных слотов на выбранную дату и услуги.</p>';
+            }
+        })
+        .catch(error => {
+            console.error('Ошибка при загрузке слотов:', error);
+        });
+});

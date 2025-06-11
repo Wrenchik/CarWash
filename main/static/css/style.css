@@ -857,7 +857,7 @@ h2 {
     top: 50%;
     left: 50%;
     width: 20vw;
-    height: 60vh;
+    height: 70vh;
     background-color: #171717;
     box-shadow: -2px 0 10px rgba(0, 0, 0, 0.5);
     transform: translate(-50%, -50%) scale(0.95);
@@ -870,7 +870,6 @@ h2 {
 
 .booking-drawer.open {
     transform: translate(-50%, -50%) translateX(0);
-    display: flex;
     flex-direction: column;
     opacity: 1;
 }
@@ -894,60 +893,112 @@ h2 {
 }
 
 .booking-form {
-    background-color: #909090;
+    margin-top: 23px;
     padding: 20px;
-    width: 100%;
-    max-width: 700px;
-    color: white;
     font-family: 'Muller', sans-serif;
     font-size: 16px;
-    border-radius: 5px;
-    box-sizing: border-box;
+}
+
+.booking-title {
+    font-family: 'Druk Wide Cyr', sans-serif;
+    font-size: 25px;
+    font-weight: 500;
+    color: white;
+    margin-bottom: 10px;
 }
 
 .booking-form label {
     display: block;
-    margin-top: 15px;
+    font-family: 'Muller', sans-serif;
     font-size: 19px;
     color: #FFFFFF;
+    margin-top: 15px;
+    margin-bottom: 15px;
 }
 
 .booking-form input[type="date"],
 .booking-form select,
 .booking-form textarea {
-    width: 100%;
     padding: 10px;
-    margin-top: 5px;
     border: none;
-    border-bottom: 1px solid #ccc;
-    background-color: transparent;
+    border-bottom: 1px solid white;
     color: white;
+    background-color: rgba(255, 255, 255, 0.2);
+    font-family: 'Muller', sans-serif;
     font-size: 16px;
     outline: none;
     box-sizing: border-box;
+    margin-top: 10px;
     resize: vertical;
 }
 
 .booking-form textarea {
-    height: 120px;
+    height: 80px;
 }
 
-.booking-form button {
-    margin-top: 20px;
+.booking-form p {
+    margin: 0px;
+}
+
+.booking-form button[type="button"],
+.booking-form button[type="submit"] {
+    display: inline-block;
     padding: 12px 25px;
+    margin-top: 10px;
     background-color: rgba(255, 255, 255, 0.2);
     color: #FFFFFF;
     font-family: 'Muller', sans-serif;
     font-size: 18px;
     font-weight: 500;
-    border: none;
+    text-align: center;
+    text-decoration: none;
     cursor: pointer;
+    border: none;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    transition: all 0.3s ease;
     border-radius: 3px;
-    transition: background-color 0.3s ease;
 }
 
-.booking-form button:hover {
+.booking-form button[type="button"]::before,
+.booking-form button[type="submit"]::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 3%;
     background-color: #711919;
+    z-index: -1;
+    transition: width 0.3s ease;
+}
+
+.booking-form button[type="button"]:hover::before,
+.booking-form button[type="submit"]:hover::before {
+    width: 100%;
+}
+
+.booking-form input::placeholder,
+.booking-form textarea::placeholder {
+    color: #FFFFFF;
+    font-size: 14px;
+    opacity: 1;
+}
+
+.booking-form button[type="submit"]{
+    margin-top: 40px;
+}
+
+select {
+    background-color: #fff;
+    color: black;
+    border: 1px solid #711919;
+}
+
+input[type="checkbox"],
+input[type="radio"] {
+    accent-color: #711919;
 }
 
 /*Reviews*/
