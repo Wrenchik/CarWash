@@ -5,7 +5,8 @@ from django.http import JsonResponse
 from django.template.loader import render_to_string
 from django.contrib import messages
 from django.shortcuts import redirect
-from accounts.forms import UserRegisterForm
+from accounts.forms import UserRegisterForm, LoginForm
+from django.contrib.auth import authenticate, login
 
 def get_main_page(request):
     template_name = 'main/main.html'
@@ -19,22 +20,36 @@ def get_main_page(request):
     review_paginator = Paginator(reviews, 3)
     review_page_obj = review_paginator.get_page(1)
 
-    if request.method == 'POST':
-        form = UserRegisterForm(request.POST)
-        if form.is_valid():
-            user = form.save(commit=False)
-            user.is_active = False
-            user.save()
+    register_form = UserRegisterForm()
+    login_form = LoginForm()
 
-            messages.success(request, "Письмо с активацией отправлено на вашу почту.")
-            return redirect('main_page')
-    else:
-        form = UserRegisterForm()
+    if request.method == 'POST':
+        if 'register' in request.POST:
+            register_form = UserRegisterForm(request.POST)
+            if register_form.is_valid():
+                user = register_form.save(commit=False)
+                user.is_active = True
+                user.save()
+
+                return redirect('main_page')
+        elif 'login' in request.POST:
+            login_form = LoginForm(request.POST)
+            if login_form.is_valid():
+                username = login_form.cleaned_data['username']
+                password = login_form.cleaned_data['password']
+                user = authenticate(request, username=username, password=password)
+                if user is not None:
+                    login(request, user)
+                    messages.success(request, f"Добро пожаловать, {user.username}!")
+                    return redirect('main_page')
+                else:
+                    messages.error(request, "Неверное имя пользователя или пароль.")
 
     return render(request, template_name, {
         'service_page_obj': service_page_obj,
         'review_page_obj': review_page_obj,
-        'form': form,
+        'form': register_form,
+        'login_form': login_form,
     })
 
 def load_services(request):

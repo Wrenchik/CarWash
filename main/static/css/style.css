@@ -141,6 +141,46 @@ h2 {
     margin-bottom: 13px;
 }
 
+.greeting {
+    margin-bottom: 80px;
+}
+
+.drawer-content a {
+    display: inline-block;
+    width: 300px;
+    padding: 12px 25px;
+    margin-top: 20px;
+    background-color: rgba(255, 255, 255, 0.2);
+    color: #FFFFFF;
+    font-family: 'Muller', sans-serif;
+    font-size: 25px;
+    font-weight: 500;
+    text-align: left;
+    text-decoration: none;
+    cursor: pointer;
+    border: none;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    transition: all 0.3s ease;
+}
+
+.drawer-content a::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 3%;
+    background-color: #711919;
+    z-index: -1;
+    transition: width 0.3s ease;
+}
+
+.drawer-content a:hover::before {
+    width: 100%;
+}
+
 /*Review form*/
 
 .review-section {
@@ -1096,4 +1136,91 @@ input:-webkit-autofill:active {
 .form-group input {
     color: #FFFFFF !important;
     caret-color: #FFFFFF;
+}
+
+/*Feedback*/
+
+#feedback {
+    padding: 80px 0;
+    text-align: center;
+    background-color: #434343;
+    position: relative;
+}
+
+#reviews-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+    max-width: 1244px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.review {
+    padding: 30px;
+    width: 100%;
+    max-width: 1244px;
+    text-align: left;
+    position: relative;
+    border: 2px solid #fff;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+.review-header {
+    width: 474px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.review-header span {
+    font-family: 'Muller', sans-serif;
+    font-size: 18px;
+    color: #ffffff;
+}
+
+.review-header .review-date {
+    color: #b3b3b3;
+    font-size: 16px;
+}
+
+.review-text {
+    font-family: 'Muller', sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    color: #e0e0e0;
+    margin-bottom: 20px;
+}
+
+.review-image {
+    margin-top: 0;
+    width: 265px;
+    height: 175px;
+    flex-shrink: 0;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.review-image img {
+    width: 265px;
+    max-height: 175px;
+    object-fit: contain;
+}
+
+.login-button{
+    margin-left: 0;
+    text-align: left;
+}
+
+.login-form-group {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
 }

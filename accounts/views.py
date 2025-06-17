@@ -23,7 +23,7 @@ class RegisterView(CreateView):
         return super().form_invalid(form)
 
 class CustomLoginView(LoginView):
-    template_name = 'accounts/login.html'
+    template_name = 'main/main.html'
 
     def form_valid(self, form):
         messages.success(self.request, f"Добро пожаловать, {form.get_user().username}!")

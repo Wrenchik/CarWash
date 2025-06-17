@@ -1,11 +1,10 @@
 {% load static %}
+
 <section id="registration">
     <img src="{% static 'img/registration.png' %}" class="background-image" alt="Фоновое изображение">
 
     <div class="registration-container">
-
         <div class="registration-content">
-
             <div class="registration-left">
                 <h2 class="registration-title">Зарегистрируйтесь</h2>
                 <p class="registration-description">
@@ -15,14 +14,16 @@
             </div>
             <div class="registration-right">
                 <div class="red-rectangle"></div>
-                <form method="post" class="registration-form">
+                <form method="post" class="registration-form" action="">
                     {% csrf_token %}
+                    <input type="hidden" name="register" value="1">
+
                     <p class="form-section-title">Введите свои данные</p>
 
                     <div class="form-grid">
                         <div class="form-row">
                             <div class="form-group name-group">
-                                <label for="name">Имя:</label>
+                                {{ form.username.label_tag }}
                                 {{ form.username }}
                                 {% if form.username.errors %}
                                     <small class="text-danger">{{ form.username.errors.0 }}</small>

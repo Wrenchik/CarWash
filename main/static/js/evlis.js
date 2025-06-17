@@ -65,3 +65,29 @@ document.getElementById('load-slots').addEventListener('click', function () {
             console.error('Ошибка при загрузке слотов:', error);
         });
 });
+
+document.addEventListener('DOMContentLoaded', function() {
+    const nextReviewsBtn = document.querySelector('#next-reviews');
+
+    if (nextReviewsBtn) {
+        nextReviewsBtn.closest('.arrow-right').addEventListener('click', function(e) {
+            e.preventDefault();
+            const currentPage = parseInt(this.getAttribute('data-page')) || 1;
+            const nextPage = currentPage + 1;
+
+            fetch(`/load_reviews/?page=${nextPage}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.html) {
+                        document.getElementById('reviews-container').insertAdjacentHTML('beforeend', data.html);
+                        this.setAttribute('data-page', nextPage);
+
+                        if (!data.has_next) {
+                            this.style.display = 'none';
+                        }
+                    }
+                })
+                .catch(error => console.error('Error loading reviews:', error));
+        });
+    }
+});

@@ -3,7 +3,6 @@
 {% block title %}Главная - Автомойка{% endblock %}
 
 {% block content %}
-
     <section id="main">
       <div class="main-content">
         <div class="text-block">
@@ -50,28 +49,7 @@
         </div>
     </section>
 
-    <section id="feedback">
-        <h2>Отзывы</h2>
-        {% for review in reviews %}
-        <div class="review">
-            <div class="review-header">
-                <span>{{ review.name }}</span>
-                {% if review.car_model %}
-                <span>{{ review.car_model }}</span>
-                {% endif %}
-                <span class="review-date">{{ review.date|date:"d.m.Y" }}</span>
-            </div>
-            <div class="review-text">
-                {{ review.text }}
-            </div>
-            {% if review.img %}
-            <div class="review-image">
-                <img src="{{ review.img.url }}" alt="Фото отзыва">
-            </div>
-            {% endif %}
-        </div>
-        {% endfor %}
-    </section>
+    {% include "includes/reviews.html" %}
 
     <section id="location">
         <h2>Как нас найти</h2>

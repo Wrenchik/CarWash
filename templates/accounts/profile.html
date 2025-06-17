@@ -47,8 +47,36 @@
             <button type="submit" class="logout-button registration-button">Выйти</button>
         </form>
         {% else %}
-          <h2>Добро пожаловать!</h2>
-          <a href="{% url 'login' %}">Войти</a><br>
-          <a href="{% url 'register' %}">Зарегистрироваться</a>
-        {% endif %}
+  <h2 class="greeting">Добро пожаловать!</h2>
+    <h3>Вход в аккаунт</h3>
+
+    {% if login_form.errors %}
+        <p style="color: #711919;">Неверное имя пользователя или пароль</p>
+    {% endif %}
+
+    <form method="post" action="" >
+        {% csrf_token %}
+        <input type="hidden" name="login" value="1">
+
+        <div class="login-form-group form-group">
+            {{ login_form.username.label_tag }}
+            {{ login_form.username }}
+            {% if login_form.username.errors %}
+                <div class="text-danger">{{ login_form.username.errors.0 }}</div>
+            {% endif %}
+        </div>
+
+        <div class="form-group">
+            {{ login_form.password.label_tag }}
+            {{ login_form.password }}
+            {% if login_form.password.errors %}
+                <div class="text-danger">{{ login_form.password.errors.0 }}</div>
+            {% endif %}
+        </div>
+
+        <button type="submit" class="login-button registration-button">Войти</button>
+    </form>
+
+    <a href="#registration">Зарегистрироваться</a>
+    {% endif %}
 </div>

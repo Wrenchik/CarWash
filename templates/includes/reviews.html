@@ -2,13 +2,6 @@
 
 <section id="feedback">
     <h2>Отзывы</h2>
-    <div class="arrow-pagination">
-        <a href="#" class="arrow-right" data-page="1">
-            <svg id="next-reviews" width="25" height="120" viewBox="0 0 25 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M1 1L23.5 61L1 119.5" stroke="white"/>
-            </svg>
-        </a>
-    </div>
     <div id="reviews-container">
       {% for review in review_page_obj.object_list %}
       <div class="review">

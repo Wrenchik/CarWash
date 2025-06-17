@@ -24,12 +24,12 @@ class Review(models.Model):
         ordering = ['-created_at']
 
     def __str__(self):
-        return f'Отзыв от {self.name} ({self.created_at.date()})'
+        return f'Отзыв от {self.author} ({self.created_at.date()})'
 
     def save(self, *args, **kwargs):
         if self.img:
             user_id = self.id
             file_extension = os.path.splitext(self.img.name)[1]
-            filename = f'{slugify(self.name)}_{user_id}{file_extension}'
-            self.img.name = os.path.join('reviews', filename)
+            filename = f'{slugify(self.author)}_{user_id}{file_extension}'
+            self.img.author = os.path.join('reviews', filename)
         super().save(*args, **kwargs)

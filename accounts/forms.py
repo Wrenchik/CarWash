@@ -61,3 +61,14 @@ class UserRegisterForm(UserCreationForm):
     def clean_phone(self):
         phone = self.cleaned_data.get('phone')
         return phone
+
+class LoginForm(forms.Form):
+    username = forms.CharField(
+        label='Имя пользователя',
+        max_length=150,
+        widget=forms.TextInput(attrs={'class': 'form-control', 'id': 'login_username'})
+    )
+    password = forms.CharField(
+        label='Пароль',
+        widget=forms.PasswordInput(attrs={'class': 'form-control', 'id': 'login_password'})
+    )
