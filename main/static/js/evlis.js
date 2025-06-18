@@ -6,11 +6,13 @@ document.addEventListener('DOMContentLoaded', function () {
     toggleBtn.addEventListener('click', () => {
     const isOpen = drawer.classList.toggle('open');
     overlay.classList.toggle('visible', isOpen);
+    document.body.classList.add('no-scroll');
     });
 
     overlay.addEventListener('click', () => {
     drawer.classList.remove('open');
     overlay.classList.remove('visible');
+    document.body.classList.remove('no-scroll');
     });
 
     const bookingDrawer = document.getElementById('booking-drawer');
@@ -20,11 +22,13 @@ document.addEventListener('DOMContentLoaded', function () {
     bookingToggleBtn.addEventListener('click', () => {
     const bookingIsOpen = bookingDrawer.classList.toggle('open');
     bookingOverlay.classList.toggle('visible', bookingIsOpen);
+    document.body.classList.add('no-scroll');
     });
 
     bookingOverlay.addEventListener('click', () => {
     bookingDrawer.classList.remove('open');
     bookingOverlay.classList.remove('visible');
+    document.body.classList.remove('no-scroll');
     });
 });
 

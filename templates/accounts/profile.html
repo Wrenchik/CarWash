@@ -42,6 +42,51 @@
             </form>
             </div>
         </div>
+        <h3 class="booking">Ваши записи:</h3>
+        {% if bookings %}
+        <div class="bookings-section">
+        <div class="bookings-list">
+          <ul>
+            {% for booking in bookings %}
+            <li class="booking-card">
+                  <div class="booking-field">
+                    <label>Дата:</label>
+                    <span>{{ booking.date|date:"d.m.Y" }}</span>
+                  </div>
+
+                  <div class="booking-field">
+                    <label>Время:</label>
+                    <span>{{ booking.start_time|time:"H:i" }}–{{ booking.calculate_end_time|time:"H:i" }}</span>
+                  </div>
+
+                  <div class="booking-field">
+                    <label>Услуги:</label>
+                    <ul class="services-list">
+                      {% for service in booking.services.all %}
+                      <li>{{ service.name }}</li>
+                      {% endfor %}
+                    </ul>
+                  </div>
+
+                  <div class="booking-field">
+                    <label>Комментарий:</label>
+                    <span>{{ booking.comment|default:"-" }}</span>
+                  </div>
+
+                  <div class="booking-field">
+                    <label>Способ оплаты:</label>
+                    <span>{{ booking.get_payment_method_display }}</span>
+                  </div>
+                </li>
+                {% empty %}
+                <li class="no-bookings">У вас пока нет записей</li>
+                {% endfor %}
+              </ul>
+            </div>
+        </div>
+        {% else %}
+        <div class="alert alert-info">У вас пока нет записей.</div>
+        {% endif %}
         <form method="post" action="{% url 'logout' %}">
             {% csrf_token %}
             <button type="submit" class="logout-button registration-button">Выйти</button>

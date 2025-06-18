@@ -7,6 +7,7 @@ from django.contrib import messages
 from django.shortcuts import redirect
 from accounts.forms import UserRegisterForm, LoginForm
 from django.contrib.auth import authenticate, login
+from booking.models import Booking
 
 def get_main_page(request):
     template_name = 'main/main.html'
@@ -22,6 +23,10 @@ def get_main_page(request):
 
     register_form = UserRegisterForm()
     login_form = LoginForm()
+
+    user_bookings = []
+    if request.user.is_authenticated:
+        user_bookings = Booking.objects.filter(user=request.user).order_by('-date', '-start_time')
 
     if request.method == 'POST':
         if 'register' in request.POST:
@@ -50,6 +55,7 @@ def get_main_page(request):
         'review_page_obj': review_page_obj,
         'form': register_form,
         'login_form': login_form,
+        'bookings': user_bookings,
     })
 
 def load_services(request):

@@ -15,7 +15,11 @@
             </a>
             <div id="booking-drawer" class="booking-drawer">
                 <div class="rectangle"></div>
-                {% include "booking/booking.html" %}
+                {% if user.is_authenticated %}
+                    {% include "booking/booking.html" %}
+                {% else %}
+                <h2 class="booking">Для бронирования необходимо войти в систему или зарегистрироваться</h2>
+                {% endif %}
             </div>
         </div>
         <div class="images">
@@ -43,7 +47,7 @@
         <div class="header-divider"></div>
         <div class="image-button-wrapper">
             <img src="{% static 'img/reserve.png' %}" alt="Бронь" class="reserve-image">
-            <a class="one-click-btn reserve-btn" id="openModalBtn">
+            <a href="#main" class="one-click-btn reserve-btn" id="openModalBtn">
                 Записаться <span class="btn-arrow">→</span>
             </a>
         </div>

@@ -24,6 +24,13 @@ body {
     width: 100%;
 }
 
+body.no-scroll {
+    overflow: hidden;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+}
+
 html {
     scroll-behavior: smooth;
 }
@@ -41,6 +48,7 @@ html {
     z-index: 1000;
     padding-top: 33px;
     padding-left: 58px;
+    overflow-y: auto;
 }
 
 .drawer-content{
@@ -115,7 +123,7 @@ h2 {
     display: flex;
     align-items: flex-start;
     gap: 34px;
-    margin-top: 75px;
+    margin-top: 55px;
     align-items: center;
 }
 
@@ -163,6 +171,7 @@ h2 {
     overflow: hidden;
     z-index: 1;
     transition: all 0.3s ease;
+    overflow-y: auto;
 }
 
 .drawer-content a::before {
@@ -192,7 +201,7 @@ h2 {
 .review-form {
     flex: 1;
     display: flex;
-    margin-top: 50px;
+    margin-top: 20px;
     justify-content: flex-start;
     align-items: flex-start;
     width: 700px;
@@ -316,7 +325,6 @@ h2 {
 .submit-btn {
     display: inline-block;
     padding: 12px 25px;
-    margin-top: 20px;
     background-color: rgba(255, 255, 255, 0.2);
     color: #FFFFFF;
     font-family: 'Muller', sans-serif;
@@ -902,6 +910,7 @@ h2 {
     box-shadow: -2px 0 10px rgba(0, 0, 0, 0.5);
     transform: translate(-50%, -50%) scale(0.95);
     opacity: 0;
+    visibility: hidden;
     transition: transform 0.3s ease-in-out;
     z-index: 1000;
     padding: 33px 58px;
@@ -912,6 +921,7 @@ h2 {
     transform: translate(-50%, -50%) translateX(0);
     flex-direction: column;
     opacity: 1;
+    visibility: visible;
 }
 
 .booking-overlay {
@@ -929,6 +939,7 @@ h2 {
 
 .booking-overlay.visible {
     opacity: 1;
+    visibility: visible;
     pointer-events: all;
 }
 
@@ -1223,4 +1234,83 @@ input:-webkit-autofill:active {
     margin-bottom: 20px;
     display: flex;
     flex-direction: column;
+}
+
+/*Booking list*/
+
+.bookings-list {
+    font-family: 'Muller', sans-serif;
+    color: #FFFFFF;
+    margin: 30px 0;
+}
+
+.booking{
+    margin-top: 0px;
+    font-family: 'Druk Wide Cyr', sans-serif;
+    font-size: 25px;
+    font-weight: 200;
+    padding-top: 28px;
+}
+
+.bookings-list ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.booking-card {
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  padding: 20px;
+}
+
+.booking-field {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+}
+
+.booking-field:last-child {
+  margin-bottom: 0;
+}
+
+.booking-field label {
+  color: rgba(255, 255, 255, 0.8);
+  min-width: 120px;
+  margin-right: 15px;
+  font-family: 'Druk Wide Cyr', sans-serif;
+  font-size: 16px;
+  text-transform: uppercase;
+}
+
+.booking-field span {
+  flex: 1;
+}
+
+.services-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  flex: 1;
+}
+
+.services-list li {
+  display: inline-block;
+  background-color: rgba(113, 25, 25, 0.3);
+  padding: 4px 10px;
+  border-radius: 3px;
+  margin-right: 6px;
+  margin-bottom: 6px;
+  font-size: 14px;
+}
+
+.alert-info {
+  font-size: 21px;
+  border-radius: 4px;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.booking-drawer h2{
+    padding: 0px;
 }
