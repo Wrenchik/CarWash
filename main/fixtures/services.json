@@ -1,0 +1,46 @@
+[
+  {
+    "model": "main.service",
+    "pk": 1,
+    "fields": {
+      "name": "Уборка салона",
+      "price_from": "1500.00",
+      "price_to": "3000.00",
+      "image": "services/cleaning.png",
+      "duration": 60
+    }
+  },
+  {
+    "model": "main.service",
+    "pk": 2,
+    "fields": {
+      "name": "Мойка кузова",
+      "price_from": "1000.00",
+      "price_to": "1500.00",
+      "image": "services/car_wash.png",
+      "duration": 60
+    }
+  },
+  {
+    "model": "main.service",
+    "pk": 3,
+    "fields": {
+      "name": "Чернение шин",
+      "price_from": "300.00",
+      "price_to": "700.00",
+      "image": "services/tire_black.png",
+      "duration": 30
+    }
+  },
+  {
+    "model": "main.service",
+    "pk": 4,
+    "fields": {
+      "name": "Полировка кузова",
+      "price_from": "2000.00",
+      "price_to": "5000.00",
+      "image": "services/polish.png",
+      "duration": 120
+    }
+  }
+]

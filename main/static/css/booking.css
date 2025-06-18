@@ -1,0 +1,22 @@
+.success-container {
+    text-align: center;
+    padding: 50px;
+}
+
+.success-title {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.back-to-main {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #aa3333;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.back-to-main:hover {
+    background-color: #882222;
+}
