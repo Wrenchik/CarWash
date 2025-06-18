@@ -20,8 +20,10 @@ class Booking(models.Model):
     def calculate_end_time(self):
         total_duration = sum(service.duration for service in self.services.all())
         start_dt = datetime.combine(self.date, self.start_time)
-        end_dt = start_dt + timedelta(minutes=total_duration)
-        return end_dt.time()
+        return (start_dt + timedelta(minutes=total_duration)).time()
+
+    def calculate_total_price(self):
+        return f"{sum(service.price for service in self.services.all())}"
 
     def __str__(self):
         return f"{self.user.username} — {self.date} {self.start_time}–{self.calculate_end_time()}"

@@ -1,0 +1,76 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Почти готово!</title>
+    <style>
+        body {
+            background: #1b1b1b;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #fff;
+            margin: 0;
+            padding: 0;
+        }
+
+        .success-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        .success-box {
+            background: #2b2b2b;
+            padding: 40px;
+            border-left: 8px solid #c7372f;
+            box-shadow: 0 0 15px rgba(0,0,0,0.4);
+            text-align: center;
+            max-width: 500px;
+            width: 90%;
+            border-radius: 10px;
+        }
+
+        .success-box h2 {
+            margin-top: 0;
+            font-size: 24px;
+            color: #f5f5f5;
+        }
+
+        .success-box p {
+            font-size: 16px;
+            margin: 12px 0;
+        }
+
+        .btn {
+            background: #c7372f;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 6px;
+            margin-top: 20px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+
+        .btn:hover {
+            background: #e0483e;
+        }
+    </style>
+</head>
+<body>
+    <div class="success-wrapper">
+        <div class="success-box">
+            <h2>Почти готово!</h2>
+            <p>Способ оплаты: <strong>{{ booking.get_payment_method_display }}</strong></p>
+            <p>Номер для перевода: <strong>{{ phone }}</strong></p>
+            <p>Дата: <strong>{{ booking.date }}</strong></p>
+            <p>Время: <strong>{{ booking.start_time }}–{{ booking.calculate_end_time }}</strong></p>
+            <a href="{% url 'main_page' %}" class="btn">← Вернуться на главную</a>
+        </div>
+    </div>
+</body>
+</html>

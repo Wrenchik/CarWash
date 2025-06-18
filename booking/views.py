@@ -1,90 +1,82 @@
-from django.urls import reverse_lazy
-from django.views.generic import CreateView, TemplateView
+import json
+from datetime import datetime, time, timedelta
+from django.shortcuts import render, redirect
 from django.views import View
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic import TemplateView
 from django.http import JsonResponse
+from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Booking
 from main.models import Service
 from .forms import BookingForm
-from datetime import datetime, time, timedelta
-from django.utils.dateparse import parse_date, parse_time
+
+STEP_MINUTES = 30
+WORK_START = time(11, 0)
+WORK_END   = time(21, 0)
 
 def get_available_slots(date, selected_services, existing_bookings):
-    work_start = time(11, 0)
-    work_end = time(21, 0)
-
-    total_duration = sum(service.duration for service in selected_services)
-    delta = timedelta(minutes=60)
+    total_minutes = sum(s.duration for s in selected_services)
+    day_start = datetime.combine(date, WORK_START)
+    day_end   = datetime.combine(date, WORK_END)
+    step = timedelta(minutes=STEP_MINUTES)
 
     slots = []
-    current_time = datetime.combine(date, work_start)
-    end_of_day = datetime.combine(date, work_end)
+    cursor = day_start
+    while cursor + timedelta(minutes=total_minutes) <= day_end:
+        slot_start = cursor.time()
+        slot_end_dt = cursor + timedelta(minutes=total_minutes)
+        slot_end = slot_end_dt.time()
 
-    while current_time + timedelta(minutes=total_duration) <= end_of_day:
-        current_end = current_time + timedelta(minutes=total_duration)
-        overlap = False
-        for booking in existing_bookings:
-            booked_start = datetime.combine(booking.date, booking.start_time)
-            booked_end = datetime.combine(booking.date, booking.end_time)
-            if booked_start < current_end and current_time < booked_end:
-                overlap = True
+        # проверяем пересечение
+        conflict = False
+        for b in existing_bookings:
+            b_start = datetime.combine(b.date, b.start_time)
+            b_end   = datetime.combine(b.date, b.calculate_end_time())
+            if not (slot_end <= b_start.time() or slot_start >= b_end.time()):
+                conflict = True
                 break
-        if not overlap:
-            slots.append(current_time.time())
-        current_time += delta
+        if not conflict:
+            slots.append(slot_start.strftime('%H:%M'))
+        cursor += step
 
     return slots
 
-class CreateBookingView(View):
-    def post(self, request):
-        data = request.POST
-        user = request.user
-        service_ids = data.getlist('services')
-        date = parse_date(data.get('date'))
-        start_time = parse_time(data.get('start_time'))
-        comment = data.get('comment', '')
-        payment_method = data.get('payment_method', 'cash')
+class BookingPageView(LoginRequiredMixin, TemplateView):
+    template_name = 'booking/booking.html'
 
+    def get_context_data(self, **kwargs):
+        ctx = super().get_context_data(**kwargs)
+        ctx['services'] = Service.objects.all()
+        return ctx
+
+class AvailableSlotsView(LoginRequiredMixin, View):
+    def get(self, request):
+        date_str = request.GET.get('date')
+        service_ids = request.GET.getlist('services')
+        if not date_str or not service_ids:
+            return JsonResponse({'error': 'Недостаточно данных'}, status=400)
+
+        date = datetime.strptime(date_str, '%Y-%m-%d').date()
         services = Service.objects.filter(id__in=service_ids)
         bookings = Booking.objects.filter(date=date)
 
         slots = get_available_slots(date, services, bookings)
-        if start_time not in slots:
-            return JsonResponse({'error': 'Выбранный слот уже занят'}, status=400)
+        return JsonResponse({'slots': slots})
 
-        booking = Booking.objects.create(
-            user=user,
-            date=date,
-            start_time=start_time,
-            comment=comment,
-            payment_method=payment_method
-        )
-        booking.services.set(services)
+class CreateBookingView(LoginRequiredMixin, View):
+    def post(self, request):
+        form = BookingForm(request.POST)
+        if not form.is_valid():
+            return JsonResponse({'errors': form.errors}, status=400)
+
+        booking = form.save(commit=False)
+        booking.user = request.user
         booking.save()
-        return JsonResponse({'message': 'Бронирование создано'})
+        form.save_m2m()
 
-class AvailableSlotsView(View):
-    def get(self, request):
-        date_str = request.GET.get('date')
-        service_ids = request.GET.getlist('services')
-
-        if not date_str or not service_ids:
-            return JsonResponse({'error': 'Недостаточно данных'}, status=400)
-
-        try:
-            date = datetime.strptime(date_str, "%Y-%m-%d").date()
-            services = Service.objects.filter(id__in=service_ids)
-            bookings = Booking.objects.filter(date=date)
-
-            available_slots = get_available_slots(date, services, bookings)
-            return JsonResponse({'available_slots': [t.strftime('%H:%M') for t in available_slots]})
-        except Exception as e:
-            return JsonResponse({'error': str(e)}, status=500)
-
-class BookingPageView(TemplateView):
-    template_name = 'booking/booking.html'
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['services'] = Service.objects.all()
-        return context
+        if booking.payment_method == 'cash':
+            return render(request, 'booking/success_cash.html', {'booking': booking})
+        else:
+            phone = "+79999999999"
+            return render(request, 'booking/success_payment.html', {
+                'booking': booking, 'phone': phone
+            })

@@ -1,33 +1,183 @@
 {% load static %}
-<h2 class="booking-title">Записаться</h2>
-<form id="booking-form" class="booking-form" method="POST" action="{% url 'create_booking' %}">
-    {% csrf_token %}
-    <label for="date">Дата:</label>
-    <input type="date" name="date" id="date" required>
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Записаться</title>
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <style>
+        body {
+            background-color: #121212;
+            font-family: Arial, sans-serif;
+            color: #fff;
+            padding: 60px 20px;
+        }
+        .booking-container {
+            max-width: 700px;
+            margin: auto;
+            background: #1e1e1e;
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.5);
+        }
+        .booking-title {
+            margin-bottom: 30px;
+            font-size: 28px;
+            text-align: center;
+        }
+        label {
+            display: block;
+            margin-top: 20px;
+        }
+        input[type=\"date\"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border-radius: 8px;
+            border: none;
+            margin-top: 5px;
+            background: #2a2a2a;
+            color: white;
+        }
+        .services-list {
+            display: flex;
+            flex-direction: column;
+            margin-top: 10px;
+        }
+        .service-item {
+            display: flex;
+            align-items: center;
+            margin-top: 10px;
+        }
+        .service-item input {
+            margin-right: 10px;
+        }
+        .btn {
+            background: #8b2c2c;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            margin-top: 20px;
+            cursor: pointer;
+        }
+        .btn:hover {
+            background: #a13d3d;
+        }
+        .slots-container {
+            margin-top: 20px;
+        }
+        .slot-item {
+            margin: 5px 0;
+        }
+        .back-btn {
+            display: inline-block;
+            margin-top: 30px;
+            background: #333;
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            color: #fff;
+        }
+        .back-btn:hover {
+            background: #444;
+        }
+    </style>
+</head>
+<body>
+    <div class="booking-container">
+        <h2 class="booking-title">Записаться</h2>
+        <form id="booking-form" method="POST" action="{% url 'booking:create_booking' %}">
+            {% csrf_token %}
+            <label for="date">Дата:</label>
+            <input type="date" name="date" id="date" required>
 
-    <label>Услуги:</label>
-    {% for service in service_page_obj.object_list %}
-        <p>
-            <input type="checkbox" name="services" value="{{ service.id }}">
-            {{ service.name }}
-        </p><br>
-    {% endfor %}
+            <label>Услуги:</label>
+            <div class="services-list">
+                {% for service in services %}
+                <div class="service-item">
+                    <input type="checkbox" name="services" id="service_{{ service.id }}" value="{{ service.id }}">
+                    <label for="service_{{ service.id }}">{{ service.name }} ({{ service.duration }} мин)</label>
+                </div>
+                {% endfor %}
+            </div>
 
-    <button type="button" id="load-slots">Показать свободное время</button>
+            <button type="button" id="load-slots" class="btn">Показать свободное время</button>
 
-    <div id="slots-container" style="margin-top: 1rem;"></div>
+            <label for="slot-select">Свободное время:</label>
+            <select id="slot-select" name="start_time" required><option value="">Выберите время</option>
+            </select>
 
-    <label for="comment">Комментарий:</label>
-    <textarea name="comment" id="comment"></textarea>
 
-    <label for="payment_method">Способ оплаты:</label>
-    <select name="payment_method" id="payment_method">
-        <option value="cash">Наличные</option>
-        <option value="card">Банковская карта</option>
-        <option value="online">СБП</option>
-    </select>
+            <label for="comment">Комментарий:</label>
+            <textarea name="comment" id="comment" rows="3"></textarea>
 
-    <input type="hidden" name="start_time" id="start_time"><br>
+            <label for="payment_method">Способ оплаты:</label>
+            <select name="payment_method" id="payment_method">
+                <option value="cash">Наличные</option>
+                <option value="card">Банковская карта</option>
+                <option value="online">СБП</option>
+            </select>
 
-    <button type="submit">Записаться</button>
-</form>
+            <button type="submit" class="btn submit-btn">Записаться</button>
+        </form>
+        <a href="{% url 'main_page' %}" class="back-btn">← Вернуться на главную</a>
+    </div>
+
+    <script>
+document.getElementById('load-slots').addEventListener('click', () => {
+    const date = document.getElementById('date').value;
+    const checked = document.querySelectorAll('input[name="services"]:checked');
+    const services = Array.from(checked).map(cb => cb.value);
+
+    if (!date || services.length === 0) {
+        alert('Пожалуйста, выберите дату и хотя бы одну услугу.');
+        return;
+    }
+
+    const params = new URLSearchParams();
+    params.append('date', date);
+    services.forEach(id => params.append('services', id));
+
+    fetch("{% url 'booking:available_slots' %}?" + params.toString(), {
+        headers: {
+            'X-Requested-With': 'XMLHttpRequest'  // если сервер этого ожидает
+        }
+    })
+
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Ошибка ответа сервера');
+        }
+        return response.json();
+    })
+    .then(data => {
+    const select = document.getElementById('slot-select');
+    select.innerHTML = '<option value="">Выберите время</option>';
+
+    if (!data.slots || data.slots.length === 0) {
+        const option = document.createElement('option');
+        option.value = '';
+        option.textContent = 'Нет свободных слотов';
+        select.appendChild(option);
+        return;
+    }
+
+    data.slots.forEach(time => {
+        const option = document.createElement('option');
+        option.value = time;
+        option.textContent = time;
+        select.appendChild(option);
+    });
+    })
+
+    .catch(error => {
+        console.error(error);
+        alert('Ошибка при загрузке слотов');
+    });
+});
+</script>
+
+</body>
+</html>

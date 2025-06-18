@@ -796,7 +796,7 @@ h2 {
 .service-card {
     border: 2px solid white;
     width: auto;
-    height: 650px:
+    height: 650px;
     display: flex;
     flex-direction: column;
     overflow: hidden;
