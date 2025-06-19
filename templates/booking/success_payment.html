@@ -66,6 +66,7 @@
         <div class="success-box">
             <h2>Почти готово!</h2>
             <p>Способ оплаты: <strong>{{ booking.get_payment_method_display }}</strong></p>
+            <p><strong>Сумма к оплате: {{ booking.calculate_total_price }}₽</strong></p>
             <p>Номер для перевода: <strong>{{ phone }}</strong></p>
             <p>Дата: <strong>{{ booking.date }}</strong></p>
             <p>Время: <strong>{{ booking.start_time }}–{{ booking.calculate_end_time }}</strong></p>
