@@ -5,18 +5,8 @@ from django.contrib.auth import get_user_model
 
 User = get_user_model()
 
+
 class UserRegisterForm(UserCreationForm):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.fields['username'].widget.attrs.pop('autofocus', None)
-
-    username = forms.CharField(
-        widget=forms.TextInput(attrs={
-            'class': 'form-control',
-            'required' : 'False',
-        })
-    )
-
     email = forms.EmailField(
         label='Email',
         required=True,
@@ -25,6 +15,7 @@ class UserRegisterForm(UserCreationForm):
             'placeholder': 'example@mail.com'
         })
     )
+
     phone = forms.CharField(
         label='Телефон',
         required=False,
@@ -37,20 +28,16 @@ class UserRegisterForm(UserCreationForm):
     class Meta:
         model = User
         fields = ['username', 'email', 'phone', 'password1', 'password2']
-        widgets = {
-            'username': forms.TextInput(attrs={
-                'class': 'form-control',
-                'autofocus': False,
-            }),
-            'email': forms.EmailInput(attrs={
-                'class': 'form-control',
-                'placeholder': 'example@mail.com'
-            }),
-            'phone': forms.TextInput(attrs={
-                'class': 'form-control',
-                'placeholder': '+7 (XXX) XXX-XX-XX'
-            }),
-        }
+
+    def init(self, *args, **kwargs):
+        super().init(*args, **kwargs)
+        for field in self.fields:
+            self.fields[field].widget.attrs.update({'class': 'form-control'})
+        self.fields['username'].widget.attrs['placeholder'] = 'Придумайте логин'
+        self.fields['email'].widget.attrs['placeholder'] = 'example@mail.com'
+        self.fields['phone'].widget.attrs['placeholder'] = '+7 (XXX) XXX-XX-XX'
+        self.fields['password1'].widget.attrs['placeholder'] = 'Не менее 8 символов'
+        self.fields['password2'].widget.attrs['placeholder'] = 'Повторите пароль'
 
     def clean_email(self):
         email = self.cleaned_data.get('email')
@@ -58,9 +45,13 @@ class UserRegisterForm(UserCreationForm):
             raise ValidationError("Этот email уже используется")
         return email
 
-    def clean_phone(self):
-        phone = self.cleaned_data.get('phone')
-        return phone
+    def save(self, commit=True):
+        user = super().save(commit=False)
+        user.email = self.cleaned_data['email']
+        user.phone = self.cleaned_data['phone']
+        if commit:
+            user.save()
+        return user
 
 class LoginForm(forms.Form):
     username = forms.CharField(

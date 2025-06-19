@@ -37,11 +37,14 @@ def get_main_page(request):
         if 'register' in request.POST:
             register_form = UserRegisterForm(request.POST)
             if register_form.is_valid():
-                user = register_form.save(commit=False)
-                user.is_active = True
-                user.save()
-
+                user = register_form.save()
+                login(request, user)
+                messages.success(request, f"Добро пожаловать, {user.username}!")
                 return redirect('main_page')
+            else:
+                for field, errors in register_form.errors.items():
+                    for error in errors:
+                        messages.error(request, f"{field}: {error}")
         elif 'login' in request.POST:
             login_form = LoginForm(request.POST)
             if login_form.is_valid():
@@ -101,7 +104,6 @@ def load_reviews(request):
 
     paginator = Paginator(reviews, 3)
     page_obj = paginator.get_page(page)
-
     html = render_to_string('includes/reviews.html', {'reviews': page_obj.object_list})
 
     has_next = page_obj.has_next()
