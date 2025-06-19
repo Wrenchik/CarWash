@@ -159,7 +159,40 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 3000);
   });
 });
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Закрытие сообщений
+    function setupAlerts() {
+        const alerts = document.querySelectorAll('.alert');
+
+        alerts.forEach(alert => {
+            // Автоматическое закрытие через 5 секунд
+            const autoCloseTimer = setTimeout(() => {
+                closeAlert(alert);
+            }, 5000);
+
+            // Закрытие по клику
+            const closeBtn = alert.querySelector('.close');
+            if (closeBtn) {
+                closeBtn.addEventListener('click', () => {
+                    clearTimeout(autoCloseTimer);
+                    closeAlert(alert);
+                });
+            }
+        });
+    }
+
+    function closeAlert(alert) {
+        alert.classList.add('fade-out');
+        alert.addEventListener('animationend', () => {
+            alert.remove();
+        }, { once: true });
+    }
+
+    setupAlerts();
+});
 </script>
+
 
 
     </section>

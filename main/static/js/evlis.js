@@ -131,3 +131,23 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 3000);
   });
 });
+
+
+// Автоматическое закрытие сообщений через 5 секунд
+document.addEventListener('DOMContentLoaded', function() {
+    setTimeout(function() {
+        const alerts = document.querySelectorAll('.alert');
+        alerts.forEach(alert => {
+            alert.style.opacity = '0';
+            setTimeout(() => alert.remove(), 500);
+        });
+    }, 5000);
+
+    // Закрытие по клику
+    document.querySelectorAll('.close').forEach(btn => {
+        btn.addEventListener('click', function() {
+            this.parentElement.style.opacity = '0';
+            setTimeout(() => this.parentElement.remove(), 500);
+        });
+    });
+})
