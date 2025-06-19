@@ -45,6 +45,7 @@
     <div class="success-box">
         <h2>Почти готово!</h2>
         <p>Оплатите наличными при визите.</p>
+        <p><strong>Сумма к оплате: {{ booking.calculate_total_price }}₽</strong></p>
         <p><strong>Дата:</strong> {{ booking.date }}<br>
         <strong>Время:</strong> {{ booking.start_time }}–{{ booking.calculate_end_time|join:':' }}</p>
         <a href="{% url 'main_page' %}" class="btn">← Вернуться на главную</a>
