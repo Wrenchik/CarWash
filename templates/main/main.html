@@ -4,26 +4,79 @@
 
 {% block content %}
     <section id="main">
+    <div id="auth-warning" class="auth-warning hidden">
+  Пожалуйста, авторизуйтесь, чтобы записаться.
+</div>
+
+<style>
+  .auth-warning {
+    position: fixed;
+    top: 20px; left: 50%;
+    transform: translateX(-50%);
+    background: #c7372f;
+    color: #fff;
+    padding: 12px 24px;
+    border-radius: 6px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+    z-index: 3000;
+    font-size: 16px;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+  }
+  .auth-warning.visible {
+    opacity: 1;
+  }
+  .auth-warning.hidden {
+    display: none;
+  }
+</style>
+
       <div class="main-content">
         <div class="text-block">
           <div class="headline">CleanLab —<br>формула идеальной чистоты</div>
           <div class="subheadline">Где технологии и внимание к деталям создают эталонный результат</div>
             <div class="booking-overlay" id="booking-overlay"></div>
-            <a class="one-click-btn" href="{% url 'booking:booking_page' %}">
-            <span class="red-block"></span>
-             Быстрая запись в один клик <span class="arrow">⟶</span>
-            </a>
+            {% if user.is_authenticated %}
+  <!-- Авторизованный: обычная ссылка -->
+  <a class="one-click-btn" href="{% url 'booking:booking_page' %}">
+    <span class="red-block"></span>
+    Быстрая запись в один клик <span class="arrow">⟶</span>
+  </a>
+{% else %}
+  <button class="one-click-btn" id="open-booking-guest" type="button">
+    <span class="red-block"></span>
+    Быстрая запись в один клик <span class="arrow">⟶</span>
+  </button>
+{% endif %}
 
+<div id="guest-modal" class="guest-modal hidden">
+  <div class="guest-modal-content">
+    <span class="guest-modal-close">&times;</span>
+    <h2>Внимание</h2>
+    <p>Чтобы записаться, необходимо <a href="{% url 'login' %}">войти</a> или <a href="{% url 'register' %}">зарегистрироваться</a>.</p>
+  </div>
+</div>
 
-            <div id="booking-drawer" class="booking-drawer">
-                <div class="rectangle"></div>
-                {% if user.is_authenticated %}
-                    {% include "booking/booking.html" %}
-                {% else %}
-                <h2 class="booking">Для бронирования необходимо войти в систему или зарегистрироваться</h2>
-                {% endif %}
+        <style>
+  .guest-modal {
+    position: fixed; inset:0;
+    background: rgba(0,0,0,0.7);
+    display: flex; align-items:center; justify-content:center;
+    z-index: 2000;
+  }
+  .guest-modal.hidden { display: none; }
+  .guest-modal-content {
+    background: #1e1e1e; color:#fff;
+    padding: 30px; border-radius:8px; position:relative;
+    max-width:300px; text-align:center;
+  }
+  .guest-modal-close {
+    position:absolute; top:8px; right:12px;
+    font-size:24px; cursor:pointer;
+  }
+  .guest-modal-content a { color:#c7372f; text-decoration:underline; }
+</style>
 
-            </div>
         </div>
         <div class="images">
           <img src="{% static 'img/main1.png' %}" alt="ГлавноеФото1">
@@ -88,6 +141,26 @@
             width="100%" height="400" frameborder="1" allowfullscreen="true" style="position:relative;">
         </iframe>
         </div>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const guestBtn = document.getElementById('open-booking-guest');
+  const warning = document.getElementById('auth-warning');
+
+  guestBtn?.addEventListener('click', () => {
+    // Сначала сделаем элемент видимым
+    warning.classList.remove('hidden');
+    warning.classList.add('visible');
+
+    // Спустя 3 секунды уберём видимость
+    setTimeout(() => {
+      warning.classList.remove('visible');
+      // Ещё через полсекунды полностью прячем
+      setTimeout(() => warning.classList.add('hidden'), 500);
+    }, 3000);
+  });
+});
+</script>
+
 
     </section>
 {% endblock %}

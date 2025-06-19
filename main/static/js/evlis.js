@@ -95,3 +95,39 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 });
+
+document.addEventListener('DOMContentLoaded', () => {
+  const btnGuest = document.getElementById('open-booking-guest');
+  const modal   = document.getElementById('guest-modal');
+  const close   = modal?.querySelector('.guest-modal-close');
+
+  btnGuest?.addEventListener('click', () => {
+    modal.classList.remove('hidden');
+  });
+  close?.addEventListener('click', () => {
+    modal.classList.add('hidden');
+  });
+  // клик по фону
+  modal?.addEventListener('click', e => {
+    if (e.target === modal) modal.classList.add('hidden');
+  });
+});
+
+
+document.addEventListener('DOMContentLoaded', () => {
+  const guestBtn = document.getElementById('open-booking-guest');
+  const warning = document.getElementById('auth-warning');
+
+  guestBtn?.addEventListener('click', () => {
+    // Сначала сделаем элемент видимым
+    warning.classList.remove('hidden');
+    warning.classList.add('visible');
+
+    // Спустя 3 секунды уберём видимость
+    setTimeout(() => {
+      warning.classList.remove('visible');
+      // Ещё через полсекунды полностью прячем
+      setTimeout(() => warning.classList.add('hidden'), 500);
+    }, 3000);
+  });
+});

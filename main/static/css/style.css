@@ -1314,3 +1314,42 @@ input:-webkit-autofill:active {
 .booking-drawer h2{
     padding: 0px;
 }
+
+.guest-modal {
+    position: fixed; inset:0;
+    background: rgba(0,0,0,0.7);
+    display: flex; align-items:center; justify-content:center;
+    z-index: 2000;
+  }
+  .guest-modal.hidden { display: none; }
+  .guest-modal-content {
+    background: #1e1e1e; color:#fff;
+    padding: 30px; border-radius:8px; position:relative;
+    max-width:300px; text-align:center;
+  }
+  .guest-modal-close {
+    position:absolute; top:8px; right:12px;
+    font-size:24px; cursor:pointer;
+  }
+  .guest-modal-content a { color:#c7372f; text-decoration:underline; }
+
+    .auth-warning {
+    position: fixed;
+    top: 20px; left: 50%;
+    transform: translateX(-50%);
+    background: #c7372f;
+    color: #fff;
+    padding: 12px 24px;
+    border-radius: 6px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+    z-index: 3000;
+    font-size: 16px;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+  }
+  .auth-warning.visible {
+    opacity: 1;
+  }
+  .auth-warning.hidden {
+    display: none;
+  }
