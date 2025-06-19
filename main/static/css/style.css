@@ -505,7 +505,6 @@ h2 {
 
 .one-click-btn:hover {
     color: white;
-    border-color: #5a1515;
 }
 
 .one-click-btn:hover::before {
@@ -796,7 +795,7 @@ h2 {
 .service-card {
     border: 2px solid white;
     width: auto;
-    height: 650px;
+    height: 460px;
     display: flex;
     flex-direction: column;
     overflow: hidden;
@@ -1353,3 +1352,48 @@ input:-webkit-autofill:active {
   .auth-warning.hidden {
     display: none;
   }
+
+  .messages-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1100;
+    max-width: 400px;
+}
+
+.alert {
+    padding: 15px 20px;
+    margin-bottom: 15px;
+    border-radius: 4px;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    animation: slideIn 0.5s forwards;
+}
+
+.alert-success {
+    background-color: #711919;
+}
+
+.alert-error {
+    background-color: #711919;
+}
+
+.alert-info {
+    background-color: #711919;
+}
+
+.close {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+    margin-left: 15px;
+}
+
+@keyframes slideIn {
+    from { transform: translateX(100%); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}

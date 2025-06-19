@@ -5,9 +5,13 @@ from django.http import JsonResponse
 from django.template.loader import render_to_string
 from django.contrib import messages
 from django.shortcuts import redirect
+from .forms import ReviewForm
 from accounts.forms import UserRegisterForm, LoginForm
 from django.contrib.auth import authenticate, login
 from booking.models import Booking
+from django.http import HttpResponseRedirect
+from django.urls import reverse
+
 
 def get_main_page(request):
     template_name = 'main/main.html'
@@ -23,6 +27,7 @@ def get_main_page(request):
 
     register_form = UserRegisterForm()
     login_form = LoginForm()
+    review_form = ReviewForm()
 
     user_bookings = []
     if request.user.is_authenticated:
@@ -50,12 +55,27 @@ def get_main_page(request):
                 else:
                     messages.error(request, "Неверное имя пользователя или пароль.")
 
+        elif 'review_submit' in request.POST:
+            review_form = ReviewForm(request.POST, request.FILES)
+            if review_form.is_valid():
+                review = review_form.save(commit=False)
+                if request.user.is_authenticated:
+                    review.author = request.user
+                review.is_published = False
+                review.save()
+                messages.success(request, "Спасибо за ваш отзыв! Он будет опубликован после проверки.")
+                return HttpResponseRedirect(reverse('main_page') + '#feedback')
+            else:
+                messages.error(request, "Пожалуйста, исправьте ошибки в форме.")
+
+
     return render(request, template_name, {
         'service_page_obj': service_page_obj,
         'review_page_obj': review_page_obj,
         'form': register_form,
         'login_form': login_form,
         'bookings': user_bookings,
+        'review_form': review_form,
     })
 
 def load_services(request):

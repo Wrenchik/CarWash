@@ -43,10 +43,10 @@
     Быстрая запись в один клик <span class="arrow">⟶</span>
   </a>
 {% else %}
-  <button class="one-click-btn" id="open-booking-guest" type="button">
+  <a class="one-click-btn" id="open-booking-guest" type="button">
     <span class="red-block"></span>
     Быстрая запись в один клик <span class="arrow">⟶</span>
-  </button>
+  </a>
 {% endif %}
 
 <div id="guest-modal" class="guest-modal hidden">
@@ -58,24 +58,24 @@
 </div>
 
         <style>
-  .guest-modal {
-    position: fixed; inset:0;
-    background: rgba(0,0,0,0.7);
-    display: flex; align-items:center; justify-content:center;
-    z-index: 2000;
-  }
-  .guest-modal.hidden { display: none; }
-  .guest-modal-content {
-    background: #1e1e1e; color:#fff;
-    padding: 30px; border-radius:8px; position:relative;
-    max-width:300px; text-align:center;
-  }
-  .guest-modal-close {
-    position:absolute; top:8px; right:12px;
-    font-size:24px; cursor:pointer;
-  }
-  .guest-modal-content a { color:#c7372f; text-decoration:underline; }
-</style>
+          .guest-modal {
+            position: fixed; inset:0;
+            background: rgba(0,0,0,0.7);
+            display: flex; align-items:center; justify-content:center;
+            z-index: 2000;
+          }
+          .guest-modal.hidden { display: none; }
+          .guest-modal-content {
+            background: #1e1e1e; color:#fff;
+            padding: 30px; border-radius:8px; position:relative;
+            max-width:300px; text-align:center;
+          }
+          .guest-modal-close {
+            position:absolute; top:8px; right:12px;
+            font-size:24px; cursor:pointer;
+          }
+          .guest-modal-content a { color:#c7372f; text-decoration:underline; }
+        </style>
 
         </div>
         <div class="images">
